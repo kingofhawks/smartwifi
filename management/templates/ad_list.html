@@ -1,0 +1,96 @@
+{% extends "list_base.html" %}
+{% load i18n staticfiles project_filters %}
+
+{% block extra_css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'datatables/media/css/jquery.dataTables.css' %}">
+    <link rel="stylesheet" href="{% static 'messenger/build/css/messenger.css' %}">
+    <link rel="stylesheet" href="{% static 'messenger/build/css/messenger-theme-future.css' %}">
+{#    <link rel="stylesheet" href="https://cdn.datatables.net/plug-ins/a5734b29083/integration/bootstrap/3/dataTables.bootstrap.css">#}
+{% endblock %}
+
+{% block extra_js %}
+    {{ block.super }}
+    <script src="{% static 'datatables/media/js/jquery.dataTables.js' %}"></script>
+    <script src="{% static 'jquery-cookie/jquery.cookie.js' %}"></script>
+    <script src="{% static 'messenger/build/js/messenger.min.js' %}"></script>
+    <script src="{% static 'messenger/build/js/messenger-theme-future.js' %}"></script>
+    <script src="{% static 'lodash/dist/lodash.min.js' %}"></script>
+    <script>
+    $(document).ready(function(){
+        var table = $('#table').DataTable({
+                language: {
+                    "url": "//cdn.datatables.net/plug-ins/725b2a2115b/i18n/Chinese.json"
+                }
+        });
+       var selected = [];
+
+    $('#table tbody').on( 'click', 'tr', function () {
+        $(this).toggleClass('selected');
+        var id = $(this).data("rowKey");
+        var index = $.inArray(id, selected);
+        if ( index === -1 ) {
+            selected.push( id );
+        } else {
+            selected.splice( index, 1 );
+        }
+        console.log(selected);
+    } );
+
+        $("#modify").click(function(){
+            //a trick to pass JS variable to django url template tag
+            var url = "{% url 'management.ad.update' pk=99999 %}";
+            url = url.replace(/99999/,selected[0]);
+            window.location.href = url;
+        });
+
+        $("#delete").click(function(){
+            //a trick to pass JS variable to django url template tag
+            var url = "{% url 'management.ad.delete' pk=99999 %}";
+            url = url.replace(/99999/,selected[0]);
+            window.location.href = url;
+        });
+
+
+        $("#detail").click(function(){
+            //a trick to pass JS variable to django url template tag
+            var url = "{% url 'management.ad.detail' pk=99999 %}";
+            url = url.replace(/99999/,selected[0]);
+            window.location.href = url;
+        });
+
+
+    });
+    </script>
+{% endblock %}
+
+{% block left_panel %}
+<ul class="nav nav-pills nav-stacked">
+  <li class="active"><a href="{% url "management.ads" %}">{% trans "AD Management"%}</a></li>
+  <li><a href="{% url "management.adstats" %}">{% trans "AD Statistics"%}</a></li>
+</ul>
+{% endblock %}
+
+{% block toolbar %}
+<div class="btn-group">
+  <a href="{% url "management.ad.add" %}" class="btn btn-default">{% trans "Create" %}</a>
+  <a id="modify" class="btn btn-default">{% trans "Modify" %}</a>
+  <a id="delete" class="btn btn-default">{% trans "Delete" %}</a>
+  <a id="detail" class="btn btn-default">{% trans "Detail" %}</a>
+</div>
+{% endblock %}
+
+{% block list %}
+<table class="display table table-bordered" id="table">
+    <thead>
+        <th>{% trans "Ad Type" %}</th>
+        <th>{% trans "Thumbnail" %}</th>
+    </thead>
+    {% for ad in ads %}
+        <tr data-row-key="{{ ad.id }}">
+            <td>{{ ad.ad_type }}</td>
+            <td>{{ ad.ad_img }}</td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}

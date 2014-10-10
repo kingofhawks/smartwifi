@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block extra_css %}
+    <style>
+    .line {
+        height:30px
+    }
+    </style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+{#control paging for phantomjs PDf rendering#}
+
+<div style="page-break-after: always;">
+    <header>
+        <hgroup>
+            <h3 class="text-center">绿色施工批次评价汇总表</h3>
+        </hgroup>
+    </header>
+    <table class="table table-bordered">
+        <tr>
+            <td rowspan="2" colspan="3">工程名称</td>
+            <td rowspan="2" colspan="6"></td>
+            <td colspan="2">编号</td>
+            <td colspan="4"></td>
+        </tr>
+        <tr>
+            <td colspan="2">填表日期</td>
+            <td colspan="4"></td>
+        </tr>
+        <tr>
+            <td colspan="3">评价阶段</td>
+            <td colspan="12"></td>
+        </tr>
+        <tr>
+            <td colspan="3">评价要素</td>
+            <td colspan="6">评价得分</td>
+            <td colspan="2">权重系数</td>
+            <td colspan="4">实得分</td>
+        </tr>
+        <tr>
+            <td colspan="3">环境保护</td>
+            <td colspan="6"></td>
+            <td colspan="2">0.3</td>
+            <td colspan="4"></td>
+        </tr>
+        <tr>
+            <td colspan="3">节材与材料资源利用</td>
+            <td colspan="6"></td>
+            <td colspan="2">0.2</td>
+            <td colspan="4"></td>
+        </tr>
+        <tr>
+            <td colspan="3">节水与水资源利用</td>
+            <td colspan="6"></td>
+            <td colspan="2">0.2</td>
+            <td colspan="4"></td>
+        </tr>
+        <tr>
+            <td colspan="3">节能与能源利用</td>
+            <td colspan="6"></td>
+            <td colspan="2">0.2</td>
+            <td colspan="4"></td>
+        </tr>
+        <tr>
+            <td colspan="3">节地与施工用地保护</td>
+            <td colspan="6"></td>
+            <td colspan="2">0.1</td>
+            <td colspan="4"></td>
+        </tr>
+        <tr>
+            <td colspan="3">合计</td>
+            <td colspan="6"></td>
+            <td colspan="2">1</td>
+            <td colspan="4"></td>
+        </tr>
+        <tr>
+            <td colspan="3">评价评论</td>
+            <td colspan="10" style="height:150px">
+                1.控制项：<br>
+                2.评价得分：<br>
+                3.有选项：<br>
+                结论：
+            </td>
+        </tr>
+        <tr>
+            <td rowspan="2" colspan="1">签字栏</td>
+            <td colspan="4">建设单位</td>
+            <td colspan="5">监理单位</td>
+            <td colspan="5">施工单位</td>
+        </tr>
+        <tr style="height:100px">
+            <td colspan="4"></td>
+            <td colspan="5"></td>
+            <td colspan="5"></td>
+        </tr>
+        </table>
+</div>
+
+</div>
+{% endblock %}

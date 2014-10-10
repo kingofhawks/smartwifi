@@ -1,0 +1,27 @@
+<html>
+{% load staticfiles%}
+
+<head>
+    <script src="{% static 'vendor/pdf.js' %}"></script>
+    <script src="{% static 'js/pdf.form.js' %}"></script>
+</head>
+<body>
+  <canvas id="the-canvas" style="border:1px  solid black"></canvas>
+
+  <script>
+
+    //
+    // NOTE:
+    // Modifying the URL below to another server will likely *NOT* work. Because of browser
+    // security restrictions, we have to use a file server with special headers
+    // (CORS) - most servers don't support cross-origin browser requests.
+    //
+{#    var url = 'http://cdn.mozilla.net/pdfjs/helloworld.pdf';#}
+
+    PDFJS.workerSrc = "{% static 'vendor/pdf.worker.js' %}";
+   render_pdf("/media/review/form/batch/{{ project_id }}.pdf");
+
+  </script>
+  
+</body>
+</html>

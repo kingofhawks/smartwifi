@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+<div id="wrapper">
+    <header>
+    {% block header %}{% endblock %}
+    </header>
+
+    <div class="container">
+    {% if messages %}
+    <div class="messages">
+    {% for message in messages %}
+    <div class="alert alert-dismissable alert-{{ message.tags }}" data-alert="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        {{ message }}
+    </div>
+    {% endfor %}
+    </div>
+    {% endif %}
+
+    <h1>{% block title %}{% endblock %}</h1>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+                {% block left_panel %}
+                {% endblock %}
+            </div>
+
+            <div class="col-md-7">
+                {% block main %}{% endblock %}
+            </div>
+
+{#            <div class="col-md-3">#}
+{#                <div class="panel panel-default">#}
+{#                    <div class="panel-body">#}
+{#                    {% block right_panel %}#}
+{#                    {% endblock %}#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <p class="site-info text-center">
+                    {% trans "Powered by" %}
+                    <a href="http://getbootstrap.com">Bootstrap</a>
+                    {% trans "and" %}
+                    <a href="http://www.djangoproject.com">Django</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+</div>
+{% endblock %}

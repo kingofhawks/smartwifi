@@ -1,0 +1,215 @@
+{% extends "project_base.html" %}
+{% load i18n staticfiles project_filters%}
+
+{% block extra_css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'slick.js/slick/slick.css' %}">
+    <link rel="stylesheet" href="{% static 'magnific-popup/dist/magnific-popup.css' %}">
+    <style>
+    figure {
+        position: relative;
+        display: inline-block;
+    }
+
+    figcaption {
+        display: none;
+        position: absolute;
+        left:100px;
+        bottom: 20px;
+        right: 0;
+{#        background-color: rgba(0,0,0,.15);#}
+    }
+
+    figure:hover img {
+        opacity: .7;
+    }
+
+    figure:hover figcaption {
+        display: block;
+    }
+    </style>
+{% endblock %}
+
+{% block extra_js %}
+    {{ block.super }}
+    <script src="{% static 'slick.js/slick/slick.min.js' %}"></script>
+    <script src="{% static 'jquery-cookie/jquery.cookie.js' %}"></script>
+    <script src="{% static 'jquery-file-upload/js/vendor/jquery.ui.widget.js' %}"></script>
+    <script src="{% static 'jquery-file-upload/js/jquery.iframe-transport.js' %}"></script>
+    <script src="{% static 'jquery-file-upload/js/jquery.fileupload.js' %}"></script>
+    <script src="{% static 'magnific-popup/dist/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'handlebars/handlebars.min.js' %}"></script>
+
+    <script id="pictures_template" type="text/x-handlebars-template">
+    {% verbatim %}
+          {{#each [] }}
+            <a href="{{ this.url }}">
+                <img src="{{ this.url }}" style="width: 20%; height: 20%"/>
+            </a>
+            <button class="btn btn-primary remove-pictures" id="{{ this.pk }}"><i class="fa fa-times fa"></i>删除</button>
+          {{/each}}
+    {% endverbatim %}
+    </script>
+
+    <script id="pictures_template2" type="text/x-handlebars-template">
+    {% verbatim %}
+          {{#each [] }}
+            <figure>
+                <img src="{{ this }}" style="width: 20%; height: 20%"/>
+                <figcaption><a class="btn btn-primary" id="test"><i class="fa fa-youtube-play"></i>删除</a></figcaption>
+            </figure>
+          {{/each}}
+    {% endverbatim %}
+    </script>
+
+    <script>
+        function csrfSafeMethod(method) {
+            // these HTTP methods do not require CSRF protection
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+         }
+
+        function loadPhotos(){
+            console.log("load photos");
+{#            console.log("{{ review.id }}");#}
+            $.get('{% url "management.project.achievement.pictures" review.id %}',function(data){
+                console.log(data);
+                var source   = $("#pictures_template").html();
+                var template = Handlebars.compile(source);
+                var html    = template(data);
+{#                console.log(html);#}
+                $('#popup-gallery').html(html);
+            })
+        }
+
+        $(document).ready(function(){
+            var csrf_token = $.cookie('csrftoken');
+
+{#           $(".your-class").slick({#}
+{#                dots: true,#}
+{#               autoplay:true,#}
+{#               autoplaySpeed:300,#}
+{#               speed:500#}
+{#               arrows:true,#}
+{#                 prevArrow:$(".slick-prev"),#}
+{#               nextArrow:$(".slick-next")#}
+{#               lazyLoad: 'ondemand',#}
+{#              slidesToShow: 3,#}
+{#              slidesToScroll: 1#}
+{#        });#}
+
+        $('#fileupload').fileupload({
+            dataType: 'json',
+            acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+            maxNumberOfFiles:2,
+            crossDomain: false,
+            beforeSend: function(xhr, settings) {
+                if (!csrfSafeMethod(settings.type)) {
+                    xhr.setRequestHeader("X-CSRFToken", csrf_token);
+                }
+            },
+            done: function (e, data) {
+{#                console.log(data);#}
+{#                $.each(data.result.files, function (index, file) {#}
+{#                    $('<p/>').text(file.name).appendTo(document.body);#}
+{#                });#}
+                console.log("done");
+{#                loadPhotos();#}
+            },
+            progressall: function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+{#                console.log(progress);#}
+                $('#progress .progress-bar').css(
+                    'width',
+                    progress + '%'
+                );
+            },
+            stop: function(e,data){
+                console.log("upload finished");
+                loadPhotos();
+            }
+        });
+
+        $('#popup-gallery').magnificPopup({
+          delegate: 'a', // child items selector, by clicking on it popup will open
+          type: 'image',
+          gallery:{enabled:true}
+          // other options
+        });
+
+        loadPhotos();
+
+        //use on() to replace click() for events of dynamically created element
+        $("body").on('click', '.remove-pictures', function() {
+            var url = "{% url 'management.review.photo.delete' pk=99999 %}";
+            url = url.replace(/99999/, $(this).attr("id"));
+            console.log($(this).attr("id"));
+            $.post(url,{csrfmiddlewaretoken:csrf_token}, function(data){
+                console.log(data);
+                loadPhotos();
+            })
+        });
+
+        });
+    </script>
+{% endblock %}
+
+{% block left_panel %}
+    {% include "review_left_panel.html" %}
+{% endblock %}
+
+{% block project_main %}
+{% if review.id != 99999 %}
+<div class="container">
+    <label>{% trans "Project" %}</label><p>{{ review.project.name }}<br></p>
+    <label>{% trans "Grade" %}</label><p>{{ review.grade }}<br></p>
+    <label>{% trans "Approved" %}</label><p id="approved">{{ review.approved |approve_state}}<br></p>
+    <label>{% trans "Achievement" %}</label>
+</div>
+<div>
+    <video id="example_video_1"
+      controls preload="auto" width="640" height="200"
+      poster="/static/images/oceans-clip.png">
+     <source src="/media/{{ review.achievement }}" type='video/mp4' />
+     <source src="http://video-js.zencoder.com/oceans-clip.webm" type='video/webm' />
+     <source src="http://video-js.zencoder.com/oceans-clip.ogv" type='video/ogg' />
+     <p>To view this video please enable JavaScript, and consider upgrading to a web browser that
+         <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+     </p>
+    </video>
+</div>
+
+<div>
+    <div>
+        <input id="fileupload" type="file" name="files"  accept="image/png,image/gif,image/jpg,image/jpeg"
+               data-url="{% url 'management.review.photo' review.id%}" multiple>
+    </div>
+    <!-- The global progress bar -->
+    <div id="progress" class="progress">
+        <div class="progress-bar progress-bar-success"></div>
+    </div>
+</div>
+
+{#<div class="your-class slider">#}
+{#{% for picture in pictures %}#}
+{#     <div ><img src="/media/{{ picture.file }}"></div>#}
+{#{% endfor %}#}
+{#</div>#}
+
+{#<div class="popup-gallery">#}
+{#{% for picture in pictures %}#}
+{#    <a href="/media/{{ picture.file }}">#}
+{#        <img src="/media/{{ picture.file }}" alt="{{ picture.file }}"  style="width: 20%; height: 20%"/>#}
+{#    </a>#}
+{#{% endfor %}#}
+{#</div>#}
+
+<div id="popup-gallery">
+</div>
+
+{#<figure>#}
+{#    <img src="http://127.0.0.1:8000/media/pictures/ryzg_1.jpg" style="width: 20%; height: 20%"/>#}
+{#    <figcaption><a class="btn btn-primary" id="test"><i class="fa fa-youtube-play"></i>{% trans "Remove" %}</a></figcaption>#}
+{#</figure>#}
+
+{% endif %}
+{% endblock %}

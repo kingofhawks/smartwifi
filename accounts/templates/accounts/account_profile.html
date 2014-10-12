@@ -1,0 +1,12 @@
+{% extends "enterprise_base.html" %}
+{% load i18n%}
+
+{% block main %}
+    <form method="post" action="{% url 'profile' %}">
+    {% csrf_token %}
+        <label>{% trans "User" %}：<span>{{ user }}</span></label>
+        {{ form.as_p }}
+        <input class="btn btn-success btn-lg form-control" type="submit" value="{{ title }}">
+    </form>
+{% endblock %}
+

@@ -1,0 +1,89 @@
+{% extends "list_base.html" %}
+{% load i18n project_filters staticfiles%}
+
+{% block extra_css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'datatables/media/css/jquery.dataTables.css' %}">
+    <link rel="stylesheet" href="{% static 'messenger/build/css/messenger.css' %}">
+    <link rel="stylesheet" href="{% static 'messenger/build/css/messenger-theme-future.css' %}">
+{#    <link rel="stylesheet" href="https://cdn.datatables.net/plug-ins/a5734b29083/integration/bootstrap/3/dataTables.bootstrap.css">#}
+{% endblock %}
+
+{% block extra_js %}
+    {{ block.super }}
+    <script src="{% static 'datatables/media/js/jquery.dataTables.js' %}"></script>
+    <script src="{% static 'jquery-cookie/jquery.cookie.js' %}"></script>
+    <script src="{% static 'messenger/build/js/messenger.min.js' %}"></script>
+    <script src="{% static 'messenger/build/js/messenger-theme-future.js' %}"></script>
+    <script src="{% static 'lodash/dist/lodash.min.js' %}"></script>
+    <script>
+    $(document).ready(function(){
+        var table = $('#table').DataTable({
+                language: {
+                    "url": "//cdn.datatables.net/plug-ins/725b2a2115b/i18n/Chinese.json"
+                }
+        });
+       var selected = [];
+
+    $('#table tbody').on( 'click', 'tr', function () {
+        $(this).toggleClass('selected');
+        var id = $(this).data("rowKey");
+        var index = $.inArray(id, selected);
+        if ( index === -1 ) {
+            selected.push( id );
+        } else {
+            selected.splice( index, 1 );
+        }
+        console.log(selected);
+    } );
+
+        $("#modify").click(function(){
+            //a trick to pass JS variable to django url template tag
+            var url = "{% url 'management.notification.update' pk=99999 %}";
+            url = url.replace(/99999/,selected[0]);
+            window.location.href = url;
+        });
+
+        $("#delete").click(function(){
+            //a trick to pass JS variable to django url template tag
+            var url = "{% url 'management.notification.delete' pk=99999 %}";
+            url = url.replace(/99999/,selected[0]);
+            window.location.href = url;
+        });
+    });
+    </script>
+{% endblock %}
+
+{% block left_panel %}
+{% endblock %}
+
+{% block toolbar %}
+<div class="btn-group">
+{% if perms.management.manage_notification %}
+  <a href="{% url "management.notification.add" %}" class="btn btn-default">{% trans "Create" %}</a>
+  <a id="modify" class="btn btn-default">{% trans "Modify" %}</a>
+  <a id="delete" class="btn btn-default">{% trans "Delete" %}</a>
+{% endif %}
+</div>
+{% endblock %}
+
+{% block list %}
+<table class="table table-hover table-bordered" id="table">
+    <thead>
+        <th>{% trans "Content" %}</th>
+        <th>{% trans "Date" %}</th>
+        <th>{% trans "Target" %}</th>
+        <th>{% trans "Creator" %}</th>
+    </thead>
+    <tbody>
+        {% for p in notifications %}
+            <tr data-row-key="{{ p.id }}">
+                    <td>{{ p.content }}</td>
+                    <td>{{ p.date }}</td>
+                    <td>{{ p.target }}</td>
+                    <td>{{ p.creator }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

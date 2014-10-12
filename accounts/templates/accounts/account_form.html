@@ -1,0 +1,22 @@
+{% extends "accounts_base.html" %}
+{% load crispy_forms_tags %}
+
+{% block meta_title %}{{ title }}{% endblock %}
+{% block body_id %}account{% endblock %}
+
+{% block main %}
+
+<form method="post"{% if form.is_multipart %} enctype="multipart/form-data"{% endif %}> {% csrf_token %}
+<div class="panel panel-primary">
+  <div class="panel-heading">{{ title }}</div>
+  <div class="panel-body">
+    {{ form|crispy }}
+    <div class="form-actions">
+        {% block account_form_actions %}
+        <input class="btn btn-success btn-lg form-control" type="submit" value="{{ title }}">
+        {% endblock %}
+    </div>
+    </div>
+</div>
+</form>
+{% endblock %}

@@ -1,0 +1,8 @@
+{% extends "enterprise_base.html" %}
+{% load i18n %}
+
+{% block main %}
+    <label>{% trans "Ad Type" %}</label><p>{{ object.ad_type }}<br></p>
+    <label>{% trans "Ad Img" %}</label><p><img src="{{ object.ad_img.url }}" style="width: 20%; height: 20%"/><br></p>
+    <label>{% trans "Ad Text" %}</label><p>{{ object.ad_text }}<br></p>
+{% endblock %}

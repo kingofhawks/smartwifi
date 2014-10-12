@@ -1,0 +1,24 @@
+{% extends "enterprise_base.html" %}
+{% load i18n %}
+
+{% block main %}
+{% block toolbar %}{% endblock %}
+
+{% block list %}
+{% endblock %}
+
+{#<div class="pagination">#}
+{#    <span class="step-links">#}
+{#    {% if submissions.has_previous %}#}
+{#    <a href="?page={{ submissions.previous_page_number }}">previous</a>#}
+{#    {% endif %}#}
+{#    <span class="current">#}
+{#    Page {{ submissions.number }} of {{ submissions.paginator.num_pages }}.#}
+{#    </span>#}
+{#    {% if submissions.has_next %}#}
+{#    <a href="?page={{ submissions.next_page_number }}">next</a>#}
+{#    {% endif %}#}
+{#    </span>#}
+{#</div>#}
+
+{% endblock %}

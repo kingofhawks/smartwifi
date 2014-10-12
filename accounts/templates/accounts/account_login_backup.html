@@ -1,0 +1,68 @@
+{% extends "accounts/account_form.html" %}
+{% load i18n staticfiles%}
+{% block header %}
+    <link rel="stylesheet" href="{% static 'nprogress/nprogress.css' %}">
+    <link rel="stylesheet" href="{% static 'messenger/build/css/messenger.css' %}">
+    <link rel="stylesheet" href="{% static 'messenger/build/css/messenger-theme-future.css' %}">
+
+    <script src="{% static 'nprogress/nprogress.js' %}"></script>
+    <script src="{% static 'messenger/build/js/messenger.min.js' %}"></script>
+    <script src="{% static 'messenger/build/js/messenger-theme-future.js' %}"></script>
+    <script>
+    $(document).ready(function(){
+        $( "form" ).submit(function( event ) {
+            console.log( "login now." );
+            NProgress.configure({ showSpinner: true});
+            NProgress.set(0.3);
+            NProgress.start();
+        });
+        var msg = "{{ msg }}";
+        console.log(typeof(msg));
+        console.log(msg);
+
+        if (msg){
+            Messenger().post({
+              message: msg,
+              type: "error",
+              showCloseButton:true
+            })
+        }
+
+    });
+    </script>
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#"><b>{% trans "SmartWifi" %}</b></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+{#      <form class="navbar-form navbar-left" role="search">#}
+{#        <div class="form-group">#}
+{#          <input type="text" class="form-control" placeholder="Search">#}
+{#        </div>#}
+{#      </form>#}
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="{% url "signup" %}">{% trans "Sign Up" %}</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+{% endblock %}
+{% block main %}
+{% if request.user.is_authenticated %}
+    <p>{% trans "You're already logged in. If you'd like to log in as a different user, you'll need to log out first." %}</p>
+{% else %}
+    {{ block.super }}
+    {% url "signup" as signup_url %}
+{% endif %}
+
+{% endblock %}

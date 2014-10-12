@@ -1,0 +1,7 @@
+{% load i18n staticfiles %}
+<ul class="nav nav-pills nav-stacked">
+  <li class="active"><a href="{% url "management.project.review" project_id%}">{% trans "Application Review"%}</a></li>
+  <li><a href="{% url "management.project.summary" project_id%}">{% trans "Summary Report"%}</a></li>
+  <li><a href="{% url "management.project.achievement" project_id%}">{% trans "Achievement"%}</a></li>
+  <li><a href="{% url "management.project.form" project_id %}">{% trans "Evaluation Forms"%}</a></li>
+</ul>

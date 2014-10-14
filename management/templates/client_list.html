@@ -1,4 +1,4 @@
-{% extends "list_base.html" %}
+{% extends "base_template.html" %}
 {% load i18n staticfiles%}
 
 {% block extra_css %}
@@ -28,15 +28,14 @@
     </script>
 {% endblock %}
 
-{% block left_panel %}
-<ul class="nav nav-pills nav-stacked">
-  <li class="active"><a href="{% url "management.clients" %}">{% trans "Client Stats"%}</a></li>
-  <li><a href="{% url "management.clients" %}">{% trans "Client List"%}</a></li>
-</ul>
+{% block content-header %}
+<h1>
+    Wifi Clients
+    <small>clients</small>
+</h1>
 {% endblock %}
 
-
-{% block list %}
+{% block content %}
 <table class="display table table-bordered" id="table">
     <thead>
         <th>{% trans "Username" %}</th>
@@ -54,3 +53,4 @@
     {% endfor %}
 </table>
 {% endblock %}
+

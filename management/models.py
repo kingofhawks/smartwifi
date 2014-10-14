@@ -105,7 +105,9 @@ def create_notifications(sender, instance, **kwargs):
             customers = Customer.objects.filter(agent=agent)
             print list(customers)
             for customer in customers:
-                notification = Notification(content=instance.content, creator=instance.creator, target=customer.user,date=instance.date)
+                notification = Notification(title=instance.title,
+                                            content=instance.content,
+                                            creator=instance.creator, target=customer.user, date=instance.date)
                 notification.save()
             pass
         elif 'SuperAdminGroup' in groups or 'AdminGroup' in groups:
@@ -114,7 +116,9 @@ def create_notifications(sender, instance, **kwargs):
             agents = Agent.objects.all()
             print list(agents)
             for agent in agents:
-                notification = Notification(content=instance.content, creator=instance.creator, target=agent.user,date=instance.date)
+                notification = Notification(title=instance.title,
+                                            content=instance.content,
+                                            creator=instance.creator, target=agent.user, date=instance.date)
                 notification.save()
 
             customers = Customer.objects.all()

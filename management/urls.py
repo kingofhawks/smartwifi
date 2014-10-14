@@ -8,6 +8,7 @@ urlpatterns = patterns('',
     url(r'^notification/add/$', views.NotificationCreate.as_view(), name='management.notification.add'),
     url(r'^notification/(?P<pk>\d+)/$', views.NotificationUpdate.as_view(), name='management.notification.update'),
     url(r'^notification/(?P<pk>\d+)/delete/$', views.NotificationDelete.as_view(), name='management.notification.delete'),
+    url(r'^notification/(?P<pk>\d+)/detail/$', views.NotificationDetail.as_view(), name='management.notification.detail'),
 
     #gateway
     url(r'^gateways', views.GatewayList.as_view(), name='management.gateways'),

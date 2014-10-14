@@ -1,5 +1,5 @@
-{% extends "list_base.html" %}
-{% load i18n staticfiles project_filters %}
+{% extends "base_template.html" %}
+{% load i18n staticfiles  %}
 
 {% block extra_css %}
     {{ block.super }}
@@ -25,7 +25,6 @@
     <script src="{% static 'pickadate/lib/picker.date.js' %}"></script>
     <script src="{% static 'pickadate/lib/translations/zh_CN.js' %}"></script>
     <script src="{% static 'momentjs/moment.js' %}"></script>
-    <script src="{% static 'handlebars/handlebars.min.js' %}"></script>
 
     <script id="row-template" type="text/x-handlebars-template">
     {% verbatim %}
@@ -182,15 +181,14 @@
     </script>
 {% endblock %}
 
-{% block left_panel %}
-<ul class="nav nav-pills nav-stacked">
-  <li class="active"><a href="{% url "management.ads" %}">{% trans "AD Management"%}</a></li>
-  <li><a href="{% url "management.adstats" %}">{% trans "AD Statistics"%}</a></li>
-</ul>
+{% block content-header %}
+<h1>
+    AD Statistics
+    <small>ad report</small>
+</h1>
 {% endblock %}
 
-
-{% block list %}
+{% block content %}
 <div>
     <input type="text" class="datepicker" id="start" placeholder="{% trans 'Start Date' %}">
     <input type="text" class="datepicker" id="end" placeholder="{% trans 'End Date' %}">

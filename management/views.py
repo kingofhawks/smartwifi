@@ -305,6 +305,11 @@ class NotificationDelete(DeleteView):
     success_url = reverse_lazy('management.notifications')
 
 
+class NotificationDetail(DetailView):
+    model = Notification
+    template_name = 'notification_detail.html'
+
+
 def notification_data(request):
     groups = request.user.groups.values_list('name', flat=True)
     if 'SuperAdminGroup' in groups or 'AdminGroup' in groups:

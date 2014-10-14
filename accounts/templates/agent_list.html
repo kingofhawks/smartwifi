@@ -1,5 +1,5 @@
-{% extends "list_base.html" %}
-{% load i18n staticfiles project_filters %}
+{% extends "base_template.html" %}
+{% load i18n staticfiles %}
 
 {% block extra_css %}
     {{ block.super }}
@@ -55,15 +55,19 @@
     </script>
 {% endblock %}
 
-{% block toolbar %}
+{% block content-header %}
+<h1>
+    Agents
+    <small>agent</small>
+</h1>
+{% endblock %}
+
+{% block content %}
 <div class="btn-group">
   <a href="{% url "accounts.agent.add" %}" class="btn btn-default">{% trans "Create" %}</a>
   <a id="modify" class="btn btn-default">{% trans "Modify" %}</a>
   <a id="delete" class="btn btn-default">{% trans "Delete" %}</a>
 </div>
-{% endblock %}
-
-{% block list %}
 <table class="display table table-bordered" id="table">
     <thead>
         <th>{% trans "Username" %}</th>
@@ -79,3 +83,4 @@
     {% endfor %}
 </table>
 {% endblock %}
+

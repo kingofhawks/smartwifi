@@ -1,7 +1,14 @@
-{% extends "enterprise_base.html" %}
+{% extends "base_template.html" %}
 {% load i18n%}
 
-{% block main %}
+{% block content-header %}
+<h1>
+    Account Profile
+    <small>profile</small>
+</h1>
+{% endblock %}
+
+{% block content %}
     <form method="post" action="{% url 'profile' %}">
     {% csrf_token %}
         <label>{% trans "User" %}：<span>{{ user }}</span></label>

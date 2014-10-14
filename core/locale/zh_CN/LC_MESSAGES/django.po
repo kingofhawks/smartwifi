@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-04 09:58+0800\n"
+"POT-Creation-Date: 2014-10-12 22:27-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,59 +17,143 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: .\templates\core_base.html:67
-msgid "GreenBuilding"
-msgstr "建筑工程绿色施工管理系统"
+#: .\templates\base_template.html:6 .\templates\core_base.html:67
+#: .\templates\index.html:13
+msgid "SmartWifi"
+msgstr "智慧无线"
 
-#: .\templates\core_base.html:73
-msgid "Enterprise Info"
-msgstr "企业库"
+#: .\templates\base_template.html:60
+msgid "You have"
+msgstr "您有"
 
-#: .\templates\core_base.html:74
-#, fuzzy
-#| msgid "Projects"
-msgid "Project List"
-msgstr "项目库"
+#: .\templates\base_template.html:60 .\templates\dashboard.html:107
+msgid "Notifications"
+msgstr "通知"
 
-#: .\templates\core_base.html:75
-msgid "Submission List"
-msgstr ""
+#: .\templates\base_template.html:66
+msgid "View all"
+msgstr "查看所有"
 
-#: .\templates\core_base.html:76
-msgid "Review List"
-msgstr ""
+#: .\templates\base_template.html:122 .\templates\base_template.html.py:179
+#: .\templates\dashboard.html:11 .\templates\index.html:60
+msgid "Home"
+msgstr "首页"
 
-#: .\templates\core_base.html:86
+#: .\templates\base_template.html:127 .\templates\core_base.html:74
+#: .\templates\dashboard_1011.html:151
+msgid "System Admin"
+msgstr "系统管理员"
+
+#: .\templates\base_template.html:132 .\templates\core_base.html:77
+#: .\templates\dashboard.html:27 .\templates\dashboard_1011.html:156
+#: .\templates\dashboard_1011.html:290
+msgid "Agents"
+msgstr "代理"
+
+#: .\templates\base_template.html:137 .\templates\core_base.html:80
+#: .\templates\dashboard.html:47 .\templates\dashboard_1011.html:161
+#: .\templates\dashboard_1011.html:309
+msgid "Customers"
+msgstr "商户"
+
+#: .\templates\base_template.html:142 .\templates\core_base.html:82
+#: .\templates\dashboard_1011.html:166
+msgid "Gateway Management"
+msgstr "网关管理"
+
+#: .\templates\base_template.html:147 .\templates\dashboard.html:85
+#: .\templates\dashboard_1011.html:171 .\templates\dashboard_1011.html:347
+msgid "Clients"
+msgstr "用户"
+
+#: .\templates\base_template.html:153 .\templates\base_template.html.py:157
+#: .\templates\core_base.html:84
+msgid "AD Management"
+msgstr "广告管理"
+
+#: .\templates\base_template.html:158
+msgid "AD Statistics"
+msgstr "广告统计"
+
+#: .\templates\base_template.html:163 .\templates\core_base.html:85
+msgid "Market Management"
+msgstr "营销管理"
+
+#: .\templates\base_template.html:180
+msgid "Dashboard"
+msgstr "仪表盘"
+
+#: .\templates\core_base.html:83
+msgid "Client Stats"
+msgstr "用户统计"
+
+#: .\templates\core_base.html:95
 msgid "Notification"
-msgstr ""
+msgstr "通知"
 
-#: .\templates\core_base.html:91
+#: .\templates\core_base.html:100
 msgid "Settings"
 msgstr "设置"
 
-#: .\templates\core_base.html:93
+#: .\templates\core_base.html:102
 msgid "Sign Out"
 msgstr "退出"
 
-#: .\templates\core_base.html:144
+#: .\templates\core_base.html:153
 msgid "Powered by"
 msgstr ""
 
-#: .\templates\core_base.html:146
+#: .\templates\core_base.html:155
 msgid "and"
 msgstr ""
 
-#~ msgid "Self Evaluation"
-#~ msgstr "企业自评"
+#: .\templates\dashboard.html:12
+msgid "System Summary"
+msgstr "系统概况"
 
-#~ msgid "Process Monitor"
-#~ msgstr "过程监督"
+#: .\templates\dashboard.html:34 .\templates\dashboard.html.py:54
+#: .\templates\dashboard.html:73 .\templates\dashboard.html.py:92
+msgid "More info"
+msgstr "更多信息"
 
-#~ msgid "Selection"
-#~ msgstr "考评评选"
+#: .\templates\dashboard.html:66 .\templates\dashboard.html.py:125
+#: .\templates\dashboard_1011.html:328
+msgid "Gateways"
+msgstr "网关"
 
-#~ msgid "Project Application"
-#~ msgstr "项目申报"
+#: .\templates\dashboard.html:114
+msgid "View All"
+msgstr "查看所有"
 
-#~ msgid "Enterprise Submit"
-#~ msgstr "项目申报"
+#: .\templates\dashboard.html:140
+msgid "Customers Graph"
+msgstr "商户图"
+
+#: .\templates\dashboard.html:159
+msgid "Clients Graph"
+msgstr "用户图"
+
+#: .\templates\dashboard_1011.html:176
+msgid "AD Mangement"
+msgstr "广告管理"
+
+#: .\templates\dashboard_1011.html:181
+msgid "Market Mangement"
+msgstr "营销管理"
+
+#: .\templates\index.html:63 .\templates\index.html.py:114
+msgid "Services"
+msgstr "服务"
+
+#: .\templates\index.html:66
+msgid "Help"
+msgstr "帮助中心"
+
+#: .\templates\index.html:69
+msgid "Contace"
+msgstr "联系我们"
+
+#: .\templates\index.html:72
+msgid "Cloud Management"
+msgstr "云端管理"
+

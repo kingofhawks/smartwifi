@@ -1,5 +1,5 @@
-{% extends "list_base.html" %}
-{% load i18n project_filters staticfiles%}
+{% extends "base_template.html" %}
+{% load i18n staticfiles%}
 
 {% block extra_css %}
     {{ block.super }}
@@ -54,10 +54,15 @@
     </script>
 {% endblock %}
 
-{% block left_panel %}
+
+{% block content-header %}
+<h1>
+    Notifications
+    <small>notification</small>
+</h1>
 {% endblock %}
 
-{% block toolbar %}
+{% block content %}
 <div class="btn-group">
 {% if perms.management.manage_notification %}
   <a href="{% url "management.notification.add" %}" class="btn btn-default">{% trans "Create" %}</a>
@@ -65,11 +70,9 @@
   <a id="delete" class="btn btn-default">{% trans "Delete" %}</a>
 {% endif %}
 </div>
-{% endblock %}
-
-{% block list %}
 <table class="table table-hover table-bordered" id="table">
     <thead>
+        <th>{% trans "Title" %}</th>
         <th>{% trans "Content" %}</th>
         <th>{% trans "Date" %}</th>
         <th>{% trans "Target" %}</th>
@@ -78,6 +81,7 @@
     <tbody>
         {% for p in notifications %}
             <tr data-row-key="{{ p.id }}">
+                    <td>{{ p.title }}</td>
                     <td>{{ p.content }}</td>
                     <td>{{ p.date }}</td>
                     <td>{{ p.target }}</td>
@@ -87,3 +91,5 @@
     </tbody>
 </table>
 {% endblock %}
+
+

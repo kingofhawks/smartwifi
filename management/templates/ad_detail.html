@@ -1,8 +1,19 @@
-{% extends "enterprise_base.html" %}
+{% extends "base_template.html" %}
 {% load i18n %}
 
-{% block main %}
+{% block content-header %}
+<h1>
+    AD Detail
+    <small>ad</small>
+</h1>
+{% endblock %}
+
+{% block content %}
     <label>{% trans "Ad Type" %}</label><p>{{ object.ad_type }}<br></p>
-    <label>{% trans "Ad Img" %}</label><p><img src="{{ object.ad_img.url }}" style="width: 20%; height: 20%"/><br></p>
+    <label>{% trans "Ad Img" %}</label><p>
+    {% if object.ad_img %}
+        <img src="{{ object.ad_img.url }}" style="width: 20%; height: 20%"/>
+    {% endif %}
+    <br></p>
     <label>{% trans "Ad Text" %}</label><p>{{ object.ad_text }}<br></p>
 {% endblock %}

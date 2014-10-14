@@ -1,18 +1,36 @@
-{% extends "enterprise_base.html" %}
+{% extends "base_template.html" %}
 
 {% load crispy_forms_tags %}
 
-{% block main %}
-    <div>
-    {{ block.super }}
+{% block content-header %}
+    <h1>
+    Create Record
+    <small>create</small>
+</h1>
+{% endblock %}
+
+{% block content %}
+    <section class="content">
+    <div class="row">
+    <div class="col-md-8 col-md-offset-1">
+    <div class="box box-primary">
+    <div class="box-header">
+        <h3 class="box-title"></h3>
+    </div>
+{#    {{ block.super }}#}
     <form method="post"  role="form" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form |crispy }}
+        {{ form|crispy }}
         <div class="form-actions">
             {% block account_form_actions %}
-            <input class="btn btn-success btn-lg form-control" type="submit" value="{{ title }}">
+            <input class="btn btn-primary form-control" type="submit" value="{{ title }}">
             {% endblock %}
         </div>
     </form>
     </div>
+    </div>
+    </div>
+
+    </section>
+
 {%  endblock %}

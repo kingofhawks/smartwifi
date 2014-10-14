@@ -1,0 +1,15 @@
+{% extends "base_template.html" %}
+{% load i18n %}
+
+{% block content-header %}
+<h1>
+    Notification Detail
+    <small>notification</small>
+</h1>
+{% endblock %}
+
+{% block content %}
+    <label>{% trans "Title" %}</label><p>{{ object.title }}<br></p>
+    <label>{% trans "Content" %}</label><p>{{ object.content }}<br></p>
+    <label>{% trans "Date" %}</label><p>{{ object.date }}<br></p>
+{% endblock %}

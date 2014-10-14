@@ -4,7 +4,7 @@ from django.views.generic import ListView, DetailView
 from django.views.generic.edit import UpdateView, CreateView, DeleteView
 from django.utils.translation import ugettext as _
 import json
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.contrib.auth.decorators import login_required
 from django.contrib.messages import info, warning
 from django.core.urlresolvers import reverse, reverse_lazy
@@ -13,7 +13,7 @@ from django.core import serializers
 from django.core.serializers.json import DjangoJSONEncoder
 from datetime import datetime, date, time, timedelta
 from django.contrib.auth.models import User
-from management.models import Gateway
+from management.models import Gateway, WifiClient
 
 
 def login(request):
@@ -23,9 +23,36 @@ def login(request):
     mac = request.GET.get('mac')
     url = request.GET.get('url')
 
-    #TODO
+    if request.method == 'POST':
+        mobile = request.POST.get('mobile')
+        password = request.POST.get('password')
+        print mobile, password
+        if mobile and password is None:
+            #TODO send SMS to get password
+            pass
+        elif mobile and password:
+            #TODO verify password
+            import uuid
+            token = uuid.uuid1()
+            print token
+            gateway = get_object_or_404(Gateway, pk=gw_id)
+            try:
+                client = get_object_or_404(WifiClient, mac=mac)
+            except Http404:
+                client = WifiClient(phone=mobile, mac=mac)
+            client.gateway = gateway
+            client.token = token
+            client.last_login = datetime.today()
+            client.save()
 
-    return HttpResponse('OK', content_type="application/json")
+            #save url in session
+            request.session['url'] = url
+            request.session['token'] = token
+
+            redirect_url = 'http://{}:{}/wifidog/auth?token={}'.format(gw_address, gw_port, token)
+            return HttpResponseRedirect(redirect_url)
+
+    return render(request, 'api/login.html')
 
 
 def auth(request):
@@ -36,21 +63,24 @@ def auth(request):
     incoming = request.GET.get('incoming')
     outgoing = request.GET.get('outgoing')
 
-    #TODO
-    data = {'Auth': 1}
+    if mac and token:
+        if token == request.session.get('token'):
+            data = {'Auth': 1}
+    else:
+        data = {'Auth': 1}
 
     return HttpResponse(json.dumps(data), content_type="application/json")
 
 
 def portal(request):
-    stage = request.GET.get('stage')
-    ip = request.GET.get('ip')
-    mac = request.GET.get('mac')
-    token = request.GET.get('token')
-    incoming = request.GET.get('incoming')
-    outgoing = request.GET.get('outgoing')
-
     #TODO
+    url = request.session.get('url')
+    print url
+    if url:
+        return HttpResponseRedirect(url)
+    else:
+        #redirect to ad3
+        pass
 
     return HttpResponse('OK', content_type="application/json")
 

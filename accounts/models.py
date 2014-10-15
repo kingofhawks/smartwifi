@@ -3,7 +3,6 @@ from django.contrib.auth.models import User, Group
 from django.utils.translation import ugettext_lazy as _
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
-#from management.models import Ad
 
 
 class BaseUser(models.Model):
@@ -39,7 +38,7 @@ class Agent(BaseUser):
 
 class Customer(BaseUser):
     full_name = models.CharField(verbose_name=_('Full Name'), max_length=32, blank=True, null=True)
-    agent = models.ForeignKey(Agent)
+    agent = models.ForeignKey(Agent, verbose_name=_('Agent'))
 
 
 # method for create user after create Agent

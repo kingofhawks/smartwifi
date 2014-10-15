@@ -30,7 +30,7 @@ class Notification(models.Model):
 class Gateway(models.Model):
     gateway_name = models.CharField(verbose_name=_('Gateway Name'), max_length=128)
     mac = models.CharField(verbose_name=_('Mac'), max_length=128)
-    customer = models.ForeignKey(Customer)
+    customer = models.ForeignKey(Customer, verbose_name=_('Customer'))
 
     def __unicode__(self):
         return u'Gateway:{}'.format(self.gateway_name)

@@ -98,7 +98,7 @@
                                     <img src="img/avatar3.png" class="img-circle" alt="User Image" />
                                     <p>
                                         {{ user }} - Web Developer
-                                        <small>Member since {{ user.date_joined }}</small>
+                                        <small>{% trans "Member since" %} : {{ user.date_joined }}</small>
                                     </p>
                                 </li>
 
@@ -233,11 +233,13 @@
         <script src="{% static 'js/demo.js' %}" type="text/javascript"></script>
 
         <script src="{% static 'handlebars/handlebars.min.js' %}"></script>
+        <script src="{% static 'moment/min/moment.min.js' %}"></script>
+        <script src="{% static 'moment/min/locales.min.js' %}"></script>
         <script id="notification-template" type="text/x-handlebars-template">
         {% verbatim %}
             <li>
                 <span class="text"><a href="{{ url }}">{{ title }}</a></span>
-                <small class="label label-danger"><i class="fa fa-clock-o"></i> 2 mins</small>
+                <small class="label label-danger"><i class="fa fa-clock-o"></i> {{ badge }}</small>
                 <div class="tools">
                 </div>
             </li>
@@ -274,12 +276,15 @@
                 $("#badge2").text(count);
 
                 data.forEach(function(element, index, array){
-{#                    console.log(element);#}
+                    console.log(element);
 {#                    console.log(index);#}
                     //show last 5 notifications on dashboard
                     var url = "{% url 'management.notification.detail' pk=99999 %}";
                     url = url.replace(/99999/, element.pk);
-                    var context = {title: element.fields.title, url: url}
+{#                    moment().locale("zh-cn")#}
+{#                    console.log(moment(element.fields.date));#}
+                    var badge = moment(element.fields.date).fromNow();
+                    var context = {title: element.fields.title, url: url, badge: badge}
 
                     if (index <=4){
                         var html    = template(context);

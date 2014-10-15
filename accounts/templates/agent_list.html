@@ -3,7 +3,8 @@
 
 {% block extra_css %}
     {{ block.super }}
-    <link rel="stylesheet" href="{% static 'datatables/media/css/jquery.dataTables.css' %}">
+{#    <link rel="stylesheet" href="{% static 'datatables/media/css/jquery.dataTables.css' %}">#}
+    <link rel="stylesheet" href="{% static 'css/dataTables.bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'messenger/build/css/messenger.css' %}">
     <link rel="stylesheet" href="{% static 'messenger/build/css/messenger-theme-future.css' %}">
 {#    <link rel="stylesheet" href="https://cdn.datatables.net/plug-ins/a5734b29083/integration/bootstrap/3/dataTables.bootstrap.css">#}
@@ -12,6 +13,7 @@
 {% block extra_js %}
     {{ block.super }}
     <script src="{% static 'datatables/media/js/jquery.dataTables.js' %}"></script>
+    <script src="{% static 'datatables/media/js/dataTables.bootstrap.js' %}"></script>
     <script src="{% static 'jquery-cookie/jquery.cookie.js' %}"></script>
     <script src="{% static 'messenger/build/js/messenger.min.js' %}"></script>
     <script src="{% static 'messenger/build/js/messenger-theme-future.js' %}"></script>
@@ -57,7 +59,7 @@
 
 {% block content-header %}
 <h1>
-    Agents
+    {% trans "Agents" %}
     <small>agent</small>
 </h1>
 {% endblock %}
@@ -65,22 +67,27 @@
 {% block content %}
 <div class="btn-group">
   <a href="{% url "accounts.agent.add" %}" class="btn btn-default">{% trans "Create" %}</a>
-  <a id="modify" class="btn btn-default">{% trans "Modify" %}</a>
-  <a id="delete" class="btn btn-default">{% trans "Delete" %}</a>
 </div>
-<table class="display table table-bordered" id="table">
+<table class="display table table-bordered table-hover" id="table">
     <thead>
         <th>{% trans "Username" %}</th>
         <th>{% trans "Phone" %}</th>
         <th>{% trans "Email" %}</th>
+        <th>{% trans "Operations" %}</th>
     </thead>
-    {% for p in agents %}
-        <tr data-row-key="{{ p.id }}">
-            <td>{{ p.username }}</td>
-            <td>{{ p.phone }}</td>
-            <td>{{ p.email }}</td>
-        </tr>
-    {% endfor %}
+    <tbody>
+        {% for p in agents %}
+            <tr data-row-key="{{ p.id }}">
+                <td>{{ p.username }}</td>
+                <td>{{ p.phone }}</td>
+                <td>{{ p.email }}</td>
+                <td>
+                    <a href="{% url 'accounts.agent.update' pk=p.id %}"><i class="fa fa-edit"></i></a> &nbsp;
+                    <a href="{% url 'accounts.agent.delete' pk=p.id %}"><i class="fa fa-trash"></i></a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
 </table>
 {% endblock %}
 

@@ -234,6 +234,7 @@ class SmsTemplateCreate(CreateView):
         context = super(SmsTemplateCreate, self).get_context_data(**kwargs)
         # Add in a QuerySet of all the books
         context['title'] = _('Create')
+        context['model_name'] = _('SMS Templates')
         return context
 
 
@@ -264,6 +265,7 @@ class NotificationList(ListView):
     def get_queryset(self):
         print self.request.user
         groups = self.request.user.groups.values_list('name', flat=True)
+        print groups
         if 'SuperAdminGroup' in groups or 'AdminGroup' in groups:
             return Notification.objects.filter(processed=False)
         else:
@@ -313,9 +315,10 @@ class NotificationDetail(DetailView):
 def notification_data(request):
     groups = request.user.groups.values_list('name', flat=True)
     if 'SuperAdminGroup' in groups or 'AdminGroup' in groups:
-        query_set = Notification.objects.filter(processed=False)
+        query_set = Notification.objects.filter(processed=False).order_by('-date')
     else:
-        query_set = Notification.objects.filter(processed=False, target=request.user)
+        query_set = Notification.objects.filter(processed=False, target=request.user).order_by('-date')
     data = serializers.serialize("json", query_set)
+    print data
 
     return HttpResponse(data, content_type="application/json")

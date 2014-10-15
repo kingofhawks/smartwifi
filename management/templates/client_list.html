@@ -3,7 +3,8 @@
 
 {% block extra_css %}
     {{ block.super }}
-    <link rel="stylesheet" href="{% static 'datatables/media/css/jquery.dataTables.css' %}">
+{#    <link rel="stylesheet" href="{% static 'datatables/media/css/jquery.dataTables.css' %}">#}
+    <link rel="stylesheet" href="{% static 'css/dataTables.bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'messenger/build/css/messenger.css' %}">
     <link rel="stylesheet" href="{% static 'messenger/build/css/messenger-theme-future.css' %}">
 {#    <link rel="stylesheet" href="https://cdn.datatables.net/plug-ins/a5734b29083/integration/bootstrap/3/dataTables.bootstrap.css">#}
@@ -12,6 +13,7 @@
 {% block extra_js %}
     {{ block.super }}
     <script src="{% static 'datatables/media/js/jquery.dataTables.js' %}"></script>
+    <script src="{% static 'datatables/media/js/dataTables.bootstrap.js' %}"></script>
     <script src="{% static 'jquery-cookie/jquery.cookie.js' %}"></script>
     <script src="{% static 'messenger/build/js/messenger.min.js' %}"></script>
     <script src="{% static 'messenger/build/js/messenger-theme-future.js' %}"></script>
@@ -30,27 +32,29 @@
 
 {% block content-header %}
 <h1>
-    Wifi Clients
+    {% trans "Wifi Clients" %}
     <small>clients</small>
 </h1>
 {% endblock %}
 
 {% block content %}
-<table class="display table table-bordered" id="table">
+<table class="display table table-bordered table-hover" id="table">
     <thead>
         <th>{% trans "Username" %}</th>
         <th>{% trans "Phone" %}</th>
         <th>{% trans "MAC" %}</th>
         <th>{% trans "IP" %}</th>
     </thead>
-    {% for c in clients %}
-        <tr data-row-key="{{ c.id }}">
-            <td>{{ c.username }}</td>
-            <td>{{ c.phone }}</td>
-            <td>{{ c.mac }}</td>
-            <td>{{ c.ip }}</td>
-        </tr>
-    {% endfor %}
+    <tbody>
+        {% for c in clients %}
+            <tr data-row-key="{{ c.id }}">
+                <td>{{ c.username }}</td>
+                <td>{{ c.phone }}</td>
+                <td>{{ c.mac }}</td>
+                <td>{{ c.ip }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
 </table>
 {% endblock %}
 

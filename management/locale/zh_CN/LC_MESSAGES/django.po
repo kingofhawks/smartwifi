@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-12 14:50-0700\n"
+"POT-Creation-Date: 2014-10-14 15:13+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,12 +23,13 @@ msgid "Title"
 msgstr "标题"
 
 #: .\models.py:14 .\templates\notification_detail.html:13
+#: .\templates\notification_list.html:76
 msgid "Content"
 msgstr "内容"
 
 #: .\models.py:15 .\templates\notification_list.html:79
 msgid "Creator"
-msgstr "新增"
+msgstr "发布人"
 
 #: .\models.py:16 .\templates\notification_list.html:78
 msgid "Target"
@@ -53,6 +54,10 @@ msgstr "网关名称"
 
 #: .\models.py:32 .\models.py:75 .\templates\gateway_list.html:74
 msgid "Mac"
+msgstr "MAC地址"
+
+#: .\models.py:33
+msgid "Customer"
 msgstr ""
 
 #: .\models.py:40
@@ -63,7 +68,7 @@ msgstr "图片广告"
 msgid "img_ad"
 msgstr "图文广告"
 
-#: .\models.py:46 .\templates\ad_detail.html:12 .\templates\ad_list.html:83
+#: .\models.py:46 .\templates\ad_detail.html:12 .\templates\ad_list.html:82
 msgid "Ad Type"
 msgstr "广告类别"
 
@@ -91,15 +96,15 @@ msgstr "模板名称"
 msgid "SmsTemplate"
 msgstr "短信模板"
 
-#: .\models.py:73 .\templates\client_list.html:41
+#: .\models.py:73 .\templates\client_list.html:43
 msgid "Username"
 msgstr "用户名"
 
-#: .\models.py:74 .\templates\client_list.html:42
+#: .\models.py:74 .\templates\client_list.html:44
 msgid "Phone"
 msgstr "手机号"
 
-#: .\models.py:76 .\templates\client_list.html:44
+#: .\models.py:76 .\templates\client_list.html:46
 msgid "IP"
 msgstr "IP地址"
 
@@ -143,27 +148,29 @@ msgstr ""
 msgid "Ad Img"
 msgstr "广告图片"
 
-#: .\templates\ad_list.html:76 .\templates\gateway_list.html:67
+#: .\templates\ad_list.html:71
+msgid "AD Management"
+msgstr ""
+
+#: .\templates\ad_list.html:78 .\templates\create_project.html:7
+#: .\templates\gateway_list.html:69 .\templates\notification_list.html:70
+#: .\templates\sms_template_list.html:69 .\views.py:36 .\views.py:97
+#: .\views.py:236
 msgid "Create"
 msgstr "新增"
 
-#: .\templates\ad_list.html:77 .\templates\gateway_list.html:68
-#: .\templates\notification_list.html:69 .\templates\sms_template_list.html:68
-msgid "Modify"
-msgstr "修改"
-
-#: .\templates\ad_list.html:78 .\templates\gateway_list.html:69
-#: .\templates\notification_list.html:70 .\templates\sms_template_list.html:69
-msgid "Delete"
-msgstr "删除"
-
-#: .\templates\ad_list.html:79
-msgid "Detail"
-msgstr "详细信息"
-
-#: .\templates\ad_list.html:84
+#: .\templates\ad_list.html:83
 msgid "Thumbnail"
 msgstr "缩略图"
+
+#: .\templates\ad_list.html:84 .\templates\gateway_list.html:75
+#: .\templates\notification_list.html:80 .\templates\sms_template_list.html:75
+msgid "Operations"
+msgstr "操作"
+
+#: .\templates\ad_stats_list.html:186
+msgid "AD Statistics"
+msgstr "广告统计"
 
 #: .\templates\ad_stats_list.html:193
 msgid "Start Date"
@@ -201,16 +208,33 @@ msgstr "统计日期"
 msgid "AD Presentation Count"
 msgstr "广告展示次数"
 
-#: .\templates\client_list.html:43
+#: .\templates\client_list.html:35
+msgid "Wifi Clients"
+msgstr "用户"
+
+#: .\templates\client_list.html:45
 msgid "MAC"
-msgstr ""
+msgstr "MAC地址"
 
 #: .\templates\gateway_confirm_delete.html:6
-#, fuzzy
-#| msgid "Are you sure to delete this project?"
 msgid "Are you sure you want to delete "
-msgstr "你确定要删除此项目？"
+msgstr "您确定要删除？"
 
+#: .\templates\gateway_list.html:62
+msgid "Gateways"
+msgstr "网关名称"
+
+#: .\templates\notification_detail.html:6
+msgid "Notification Detail"
+msgstr "通知详情"
+
+#: .\templates\notification_list.html:62
+msgid "Notifications"
+msgstr "通知"
+
+#: .\templates\sms_template_list.html:62 .\views.py:237
+msgid "SMS Templates"
+msgstr "短信模板"
 
 #: .\templates\sms_template_list.html:74
 msgid "Template"
@@ -224,12 +248,10 @@ msgstr "网关编辑"
 msgid "Modify Ad"
 msgstr "广告编辑"
 
-#: .\views.py:249
+#: .\views.py:250
 msgid "Modify SMS Template"
 msgstr "短信模板编辑"
 
-#: .\views.py:298
+#: .\views.py:300
 msgid "Modify Notification"
 msgstr "通知编辑"
-
-

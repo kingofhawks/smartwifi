@@ -21,14 +21,14 @@
                             <div class="small-box bg-aqua">
                                 <div class="inner">
                                     <h3>
-                                        150
+                                        {{ agent_count }}
                                     </h3>
                                     <p>
                                         {% trans "Agents" %}
                                     </p>
                                 </div>
                                 <div class="icon">
-                                    <i class="ion ion-bag"></i>
+                                    <i class="ion ion-man"></i>
                                 </div>
                                 <a href="{% url 'accounts.agents' %}" class="small-box-footer">
                                     {% trans "More info" %} <i class="fa fa-arrow-circle-right"></i>
@@ -40,7 +40,7 @@
                             <div class="small-box bg-green">
                                 <div class="inner">
                                     <h3>
-                                        53
+                                        {{ customer_count }}
 {#                                        <sup style="font-size: 20px">%</sup>#}
                                     </h3>
                                     <p>
@@ -48,7 +48,7 @@
                                     </p>
                                 </div>
                                 <div class="icon">
-                                    <i class="ion ion-stats-bars"></i>
+                                    <i class="ion ion-person-add"></i>
                                 </div>
                                 <a href="{% url 'accounts.customers' %}" class="small-box-footer">
                                     {% trans "More info" %} <i class="fa fa-arrow-circle-right"></i>
@@ -60,14 +60,14 @@
                             <div class="small-box bg-yellow">
                                 <div class="inner">
                                     <h3>
-                                        44
+                                        {{ gateway_count }}
                                     </h3>
                                     <p>
                                         {% trans "Gateways" %}
                                     </p>
                                 </div>
                                 <div class="icon">
-                                    <i class="ion ion-person-add"></i>
+                                    <i class="ion ion-android-wifi"></i>
                                 </div>
                                 <a href="{% url 'management.gateways' %}" class="small-box-footer">
                                     {% trans "More info" %} <i class="fa fa-arrow-circle-right"></i>
@@ -79,14 +79,14 @@
                             <div class="small-box bg-red">
                                 <div class="inner">
                                     <h3>
-                                        65
+                                        {{ client_count }}
                                     </h3>
                                     <p>
                                         {% trans "Clients" %}
                                     </p>
                                 </div>
                                 <div class="icon">
-                                    <i class="ion ion-pie-graph"></i>
+                                    <i class="ion ion-ios7-people"></i>
                                 </div>
                                 <a href="{% url 'management.clients' %}" class="small-box-footer">
                                     {% trans "More info" %} <i class="fa fa-arrow-circle-right"></i>

@@ -23,6 +23,7 @@ class BaseUser(models.Model):
     ssid = models.CharField(verbose_name=_('SSID'), max_length=64, blank=True, null=True)
     sms_template = models.CharField(verbose_name=_('SMS Template'), max_length=256, blank=True, null=True)
     comment = models.CharField(verbose_name=_('Comment'), max_length=512, blank=True, null=True)
+    signup_flag = models.BooleanField(default=True)
 
     def __unicode__(self):
         return self.username
@@ -38,7 +39,7 @@ class Agent(BaseUser):
 
 class Customer(BaseUser):
     full_name = models.CharField(verbose_name=_('Full Name'), max_length=32, blank=True, null=True)
-    agent = models.ForeignKey(Agent, verbose_name=_('Agent'))
+    agent = models.ForeignKey(Agent, verbose_name=_('Agent'), blank=True, null=True)
 
 
 # method for create user after create Agent
@@ -50,7 +51,7 @@ def create_agent_user(sender, instance, **kwargs):
     print instance
     print instance.username
     print instance.password
-    if kwargs['created']:
+    if kwargs['created'] and instance.signup_flag:
         new_user = User.objects.create_user(instance.username, instance.email, instance.password)
 
         #add user to AgentGroup
@@ -98,7 +99,7 @@ def create_customer_user(sender, instance, **kwargs):
     print instance
     print instance.username
     print instance.password
-    if kwargs['created']:
+    if kwargs['created'] and instance.signup_flag:
         new_user = User.objects.create_user(instance.username, instance.email, instance.password)
 
         #add user to AgentGroup

@@ -5,8 +5,10 @@ urlpatterns = patterns('',
     # Examples:
     url(r'^login/$', views.login, name='login'),
     url(r'^signup/$', views.signup, name='signup'),
+    url(r'^reset/$', views.password_reset, name='reset'),
     url(r'^logout/$', views.logout, name='logout'),
     url(r'^profile/$', views.profile, name='profile'),
+    url(r'^captcha/$', views.refresh_captcha, name='accounts.captcha'),
     url(r'^companies/$', views.CompanyList.as_view(), name='accounts.companies'),
 
     #SysAdmin

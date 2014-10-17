@@ -3,10 +3,10 @@ import views
 
 urlpatterns = patterns('',
     # Examples:
-    url(r'^login', views.login, name='api.login'),
-    url(r'^auth', views.auth, name='api.auth'),
-    url(r'^portal', views.portal, name='api.portal'),
-    url(r'^ping', views.ping, name='api.ping'),
+    url(r'^login', views.login, name='login'),
+    url(r'^auth', views.auth, name='auth'),
+    url(r'^portal', views.portal, name='portal'),
+    url(r'^ping', views.ping, name='ping'),
 
 
 )

@@ -10,13 +10,23 @@ from django.contrib.auth.models import User
 from django.contrib.messages import info, error
 from django.http import Http404
 from django import forms
+from django.conf import settings
+from captcha.models import CaptchaStore
+from captcha.helpers import captcha_image_url
+from django.http import HttpResponse
 
 
 class CompanyList(ListView):
     model = SysAdmin
-    #model = BaseUser
     template_name = 'company_list.html'
     context_object_name = 'admins'
+
+
+def refresh_captcha(request):
+    if request.GET.get('newsn') == '1':
+        csn = CaptchaStore.generate_key()
+        cimageurl = captcha_image_url(csn)
+        return HttpResponse(cimageurl)
 
 
 # Create your views here.
@@ -26,23 +36,24 @@ def login(request, template="accounts/account_login.html"):
     """
     print '*'*20
     form = LoginForm(request.POST or None)
-    print '*'*20
     msg = ''
-    print form.is_valid()
-    if request.method == "POST" and form.is_valid():
-        print '^'*20
-        try:
-            authenticated_user = form.save()
-            if authenticated_user is not None:
-                if authenticated_user.is_active:
-                    auth_login(request, authenticated_user)
-                # Redirect to a success page.
-                #TODO redirect to core.dashboard page
-                return redirect('core.dashboard')
-        except forms.ValidationError as e:
-            print e
-            print e.message
-            msg = e
+    #print form.is_valid()
+    if request.method == "POST":
+        if form.is_valid():
+            try:
+                authenticated_user = form.save()
+                if authenticated_user is not None:
+                    if authenticated_user.is_active:
+                        auth_login(request, authenticated_user)
+                    # Redirect to a success page.
+                    #TODO redirect to core.dashboard page
+                    return redirect('core.dashboard')
+            except forms.ValidationError as e:
+                print e
+                msg = e
+        else:
+            msg = _('Invalid Captcha')
+
     print '%'*20
     context = {"form": form, "title": _("Log in"), 'msg': msg}
     return render(request, template, context)
@@ -52,8 +63,16 @@ def signup(request, template="accounts/account_signup.html"):
     """
     Signup form.
     """
+    if request.GET.get('newsn')=='1':
+        csn=CaptchaStore.generate_key()
+        cimageurl= captcha_image_url(csn)
+        return HttpResponse(cimageurl)
+
+
+    form = SignupForm(request.POST or None)
+    msg = ''
     if request.method == 'POST':
-        form = SignupForm(request.POST)
+        print form.is_valid()
         if form.is_valid():
             try:
                 new_user = form.save()
@@ -63,25 +82,38 @@ def signup(request, template="accounts/account_signup.html"):
                 return redirect('core.dashboard')
             except forms.ValidationError as e:
                 error(request, e.message)
-            #if not new_user.is_active:
-            #    if settings.ACCOUNTS_APPROVAL_REQUIRED:
-            #        send_approve_mail(request, new_user)
-            #        info(request, _("Thanks for signing up! You'll receive "
-            #                        "an email when your account is activated."))
-            #    else:
-            #        send_verification_mail(request, new_user, "signup_verify")
-            #        info(request, _("A verification email has been sent with "
-            #                        "a link for activating your account."))
-            #    return redirect(next_url(request) or "/")
-            #else:
-            #    info(request, _("Successfully signed up"))
-            #    auth_login(request, new_user)
-            #    return login_redirect(request)
-    else:
-        form = SignupForm()
+                msg = e
+                print e
+        else:
+            msg = _('Invalid Captcha')
 
-    context = {"form": form, "title": _("Sign up")}
+    context = {"form": form, "title": _("Sign up"), 'msg': msg}
     return render(request, template, context)
+
+
+def password_reset(request):
+    msg = ''
+    if request.method == 'POST':
+        username_or_password = request.POST.get('username')
+        print username_or_password
+        from django.db.models import Q
+        user = None
+        try:
+            user = User.objects.get(Q(username=username_or_password) | Q(email=username_or_password))
+        except User.DoesNotExist:
+            msg = _('User does not exist')
+            error(request, msg)
+        if user:
+            #send Email to user
+            from django.core import mail
+            #TODO
+            password_reset_link = 'reset_url'
+            print user.email
+            result = mail.send_mail(_('Password Reset Mail'), password_reset_link, settings.EMAIL_HOST_USER, [user.email])
+            if result == 1:
+                msg = _('Check your Email for password reset link')
+
+    return render(request, 'accounts/account_password_reset.html', {'msg': msg})
 
 
 def logout(request):
@@ -110,6 +142,12 @@ def profile(request, template='accounts/account_profile.html'):
             #agent.password = form.cleaned_data.get('password')
             #agent.phone = form.cleaned_data.get("phone")
             user.save()
+
+            u.email = user.email
+            from django.contrib.auth.hashers import (
+            check_password, make_password, is_password_usable)
+            u.password = make_password(user.password)
+            u.save()
     if 'AgentGroup' in groups:
         agent = get_object_or_404(Agent, username=request.user.username)
         #form = AgentForm(request.POST or None, initial={'username': agent.username, 'phone': agent.phone})
@@ -158,6 +196,7 @@ class SysAdminCreate(CreateView):
         context = super(SysAdminCreate, self).get_context_data(**kwargs)
         # Add in a QuerySet of all the books
         context['title'] = _('Create')
+        context['model_name'] = _('System Admin')
         return context
 
 
@@ -198,6 +237,7 @@ class AgentCreate(CreateView):
         context = super(AgentCreate, self).get_context_data(**kwargs)
         # Add in a QuerySet of all the books
         context['title'] = _('Create')
+        context['model_name'] = _('Agents')
         return context
 
 
@@ -238,6 +278,7 @@ class CustomerCreate(CreateView):
         context = super(CustomerCreate, self).get_context_data(**kwargs)
         # Add in a QuerySet of all the books
         context['title'] = _('Create')
+        context['model_name'] = _('Customers')
         return context
 
 

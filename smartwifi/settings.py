@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'management',
     'api',
     'crispy_forms',
+    'captcha',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -101,4 +102,12 @@ MEDIA_URL = '/media/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
+#SMTP settings
+EMAIL_HOST = 'smtp.qq.com'
+EMAIL_HOST_USER = 'your qq email'
+EMAIL_HOST_PASSWORD = 'your qq email password'
+
+#CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'
+#CAPTCHA_OUTPUT_FORMAT = u'%(image)s %(hidden_field)s %(text_field)s'
+CAPTCHA_OUTPUT_FORMAT = u'%(text_field)s %(hidden_field)s %(image)s'
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-14 13:44+0800\n"
+"POT-Creation-Date: 2014-10-15 13:36+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,15 +17,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: .\forms.py:17 .\forms.py:55 .\forms.py:83 .\models.py:11
-#: .\templates\accounts\account_login.html:16
-#: .\templates\accounts\account_signup.html:15 .\templates\agent_list.html:73
+#: .\forms.py:17 .\forms.py:55 .\forms.py:83 .\models.py:10
+#: .\templates\accounts\account_login.html:45
+#: .\templates\accounts\account_signup.html:43 .\templates\agent_list.html:73
 #: .\templates\company_list.html:69 .\templates\customer_list.html:73
 #: .\templates\sysadmin_list.html:79 .\templates\sysadmin_list_backup.html:69
 msgid "Username"
 msgstr "用户名"
 
-#: .\forms.py:18 .\models.py:16 .\templates\accounts\account_signup.html:18
+#: .\forms.py:18 .\models.py:15 .\templates\accounts\account_signup.html:46
 #: .\templates\agent_list.html:75 .\templates\company_list.html:72
 #: .\templates\customer_list.html:75 .\templates\email\account_approve.html:6
 #: .\templates\email\account_approve.txt:6 .\templates\sysadmin_list.html:82
@@ -49,8 +49,8 @@ msgstr "密码不匹配"
 msgid "Username already exists"
 msgstr "用户名已存在"
 
-#: .\forms.py:56 .\models.py:12 .\templates\accounts\account_login.html:19
-#: .\templates\accounts\account_signup.html:21
+#: .\forms.py:56 .\models.py:11 .\templates\accounts\account_login.html:48
+#: .\templates\accounts\account_signup.html:49
 msgid "Password"
 msgstr "密码"
 
@@ -66,78 +66,82 @@ msgstr "帐号尚未激活"
 msgid "Invalid username/email"
 msgstr ""
 
-#: .\models.py:14 .\templates\agent_list.html:74
+#: .\models.py:13 .\templates\agent_list.html:74
 #: .\templates\company_list.html:71 .\templates\customer_list.html:74
 #: .\templates\sysadmin_list.html:81 .\templates\sysadmin_list_backup.html:71
 msgid "Phone"
 msgstr ""
 
-#: .\models.py:15
+#: .\models.py:14
 msgid "QQ"
 msgstr ""
 
-#: .\models.py:17
+#: .\models.py:16
 msgid "override_ad1"
 msgstr "是否覆盖所有登录广告"
 
-#: .\models.py:18
+#: .\models.py:17
 msgid "ad1"
 msgstr "登录广告"
 
-#: .\models.py:19
+#: .\models.py:18
 msgid "override_ad2"
 msgstr "是否覆盖所有等待验证码广告"
 
-#: .\models.py:20
+#: .\models.py:19
 msgid "ad2"
 msgstr "等待验证码广告"
 
-#: .\models.py:21
+#: .\models.py:20
 msgid "override_ad3"
 msgstr "是否覆盖所有跳转广告"
 
-#: .\models.py:22
+#: .\models.py:21
 msgid "ad3"
 msgstr "跳转广告"
 
-#: .\models.py:23
+#: .\models.py:22
 msgid "override_ssid"
 msgstr "是否覆盖SSID"
 
-#: .\models.py:24
+#: .\models.py:23
 msgid "SSID"
 msgstr ""
 
-#: .\models.py:25
+#: .\models.py:24
 msgid "SMS Template"
 msgstr "短信模板"
 
-#: .\models.py:26
+#: .\models.py:25
 msgid "Comment"
 msgstr "备注"
 
-#: .\models.py:33 .\templates\company_list.html:70
+#: .\models.py:32 .\templates\company_list.html:70
 #: .\templates\sysadmin_list.html:80 .\templates\sysadmin_list_backup.html:70
 msgid "Super Admin"
 msgstr "超级管理员"
 
-#: .\models.py:37 .\models.py:41
+#: .\models.py:36 .\models.py:40
 msgid "Full Name"
 msgstr "全名"
 
-#: .\templates\accounts\account_login.html:23
+#: .\models.py:41
+msgid "Agent"
+msgstr ""
+
+#: .\templates\accounts\account_login.html:52
 #: .\templates\accounts\account_signup_backup.html:26
 msgid "Log In"
 msgstr "登录"
 
-#: .\templates\accounts\account_login.html:24
+#: .\templates\accounts\account_login.html:53
 #: .\templates\accounts\account_login1012.html:40
 msgid "I forgot my password"
 msgstr "忘记密码"
 
-#: .\templates\accounts\account_login.html:32
+#: .\templates\accounts\account_login.html:61
 #: .\templates\accounts\account_login_backup.html:54
-#: .\templates\accounts\account_signup.html:27
+#: .\templates\accounts\account_signup.html:57
 msgid "Sign Up"
 msgstr "注册"
 
@@ -180,11 +184,16 @@ msgstr ""
 msgid "User"
 msgstr "用户名"
 
-#: .\templates\accounts\account_signup.html:24
+#: .\templates\accounts\account_signup.html:50
+#: .\templates\accounts\account_signup.html:54
+msgid "6 to 10 characters"
+msgstr "6到10位字符"
+
+#: .\templates\accounts\account_signup.html:53
 msgid "Retype password"
 msgstr "确认密码"
 
-#: .\templates\accounts\account_signup.html:34
+#: .\templates\accounts\account_signup.html:64
 msgid "I already have a membership"
 msgstr ""
 
@@ -229,7 +238,7 @@ msgid "or"
 msgstr ""
 
 #: .\templates\accounts\includes\user_panel.html:23
-#: .\templates\accounts\includes\user_panel_nav.html:16 .\views.py:83
+#: .\templates\accounts\includes\user_panel_nav.html:16 .\views.py:91
 msgid "Sign up"
 msgstr "注册"
 
@@ -251,8 +260,8 @@ msgstr ""
 
 #: .\templates\agent_list.html:69 .\templates\company_list.html:60
 #: .\templates\customer_list.html:69 .\templates\sysadmin_list.html:74
-#: .\templates\sysadmin_list_backup.html:60 .\views.py:160 .\views.py:200
-#: .\views.py:240
+#: .\templates\sysadmin_list_backup.html:60 .\views.py:168 .\views.py:208
+#: .\views.py:248
 msgid "Create"
 msgstr ""
 
@@ -346,42 +355,42 @@ msgstr ""
 msgid "Administrators"
 msgstr ""
 
-#: .\views.py:60
+#: .\views.py:64
 msgid "Successfully signed up"
 msgstr ""
 
-#: .\views.py:119
+#: .\views.py:127
 msgid "Agent updated"
 msgstr ""
 
-#: .\views.py:120
+#: .\views.py:128
 msgid "Update Agent"
 msgstr "代理编辑"
 
-#: .\views.py:127
+#: .\views.py:135
 msgid "Customer updated"
 msgstr ""
 
-#: .\views.py:128
+#: .\views.py:136
 msgid "Update Customer"
 msgstr "商户编辑"
 
-#: .\views.py:136
+#: .\views.py:144
 msgid "SysAdmin updated"
 msgstr "系统管理员编辑"
 
-#: .\views.py:137
+#: .\views.py:145
 msgid "Update SysAdmin"
 msgstr "系统管理员编辑"
 
-#: .\views.py:173
+#: .\views.py:181
 msgid "Modify SysAdmin"
 msgstr "系统管理员编辑"
 
-#: .\views.py:213
+#: .\views.py:221
 msgid "Modify Agent"
 msgstr "代理编辑"
 
-#: .\views.py:253
+#: .\views.py:261
 msgid "Modify Customer"
 msgstr "商户编辑"

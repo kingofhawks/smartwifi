@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 from django.contrib.auth import authenticate
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.contrib.auth.tokens import default_token_generator
 from django.db.models import Q
 from django.db.models.manager import Manager
@@ -11,6 +11,9 @@ from django.forms import ModelForm
 from models import Customer, Agent, SysAdmin
 from django.shortcuts import get_object_or_404
 from django.http import Http404
+from captcha.fields import CaptchaField
+
+TYPE_CHOICES = (('1', _('Agent'),), ('2', _('Second'),))
 
 
 class SignupForm(forms.Form):
@@ -20,6 +23,8 @@ class SignupForm(forms.Form):
                                 label=_("Create password"))
     password2 = forms.CharField(widget=forms.PasswordInput(render_value=False),
                                 label=_("Repeat password"))
+    type = forms.ChoiceField(widget=forms.RadioSelect, choices=TYPE_CHOICES)
+    captcha = CaptchaField()
 
     def save(self, *args, **kwargs):
         """
@@ -29,6 +34,8 @@ class SignupForm(forms.Form):
         that if profile pages are enabled, we still have something to
         use as the profile's slug.
         """
+        account_type = self.cleaned_data['type']
+        print 'user type:{}'.format(account_type)
         username, email, password1, password2 = (self.cleaned_data['username'],
                                      self.cleaned_data['email'],
                                      self.cleaned_data['password1'],
@@ -40,21 +47,46 @@ class SignupForm(forms.Form):
             existing_user = get_object_or_404(User, username=username)
             if existing_user:
                 raise forms.ValidationError(_("Username already exists"))
+
+            existing_user = get_object_or_404(User, email=email)
+            if existing_user:
+                raise forms.ValidationError(_("Email already exists"))
         except Http404:
             pass
 
         new_user = User.objects.create_user(username, email, password1)
         user = authenticate(username=username, password=password1)
+
+        if int(account_type) == 1:
+            agent_group = Group.objects.get(name='AgentGroup')
+            print agent_group
+            new_user.groups.add(agent_group)
+            new_user.save()
+
+            agent = Agent(user=new_user, username=username, email=email, password=password1, signup_flag=False)
+            agent.save()
+        elif int(account_type) == 2:
+            customer_group = Group.objects.get(name='CustomerGroup')
+            print customer_group
+            new_user.groups.add(customer_group)
+            new_user.save()
+
+            customer = Customer(user=new_user, username=username, email=email, password=password1, signup_flag=False)
+            customer.save()
+        else:
+            print 'incorrect account_type:{}'.format(account_type)
         return user
 
 
-class LoginForm( forms.Form):
+class LoginForm(forms.Form):
     """
     Fields for login.
     """
     username = forms.CharField(label=_("Username"))
     password = forms.CharField(label=_("Password"),
                                widget=forms.PasswordInput(render_value=False))
+    captcha = CaptchaField()
+
 
     def save(self):
         """

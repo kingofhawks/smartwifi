@@ -2,6 +2,45 @@
 {% load i18n staticfiles%}
 {% block extra_css %}
 <link href="{% static 'css/AdminLTE.css' %}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{% static 'messenger/build/css/messenger.css' %}">
+    <link rel="stylesheet" href="{% static 'messenger/build/css/messenger-theme-future.css' %}">
+    <link rel="stylesheet" href="{% static 'iCheck/skins/minimal/minimal.css' %}">
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'messenger/build/js/messenger.min.js' %}"></script>
+    <script src="{% static 'messenger/build/js/messenger-theme-future.js' %}"></script>
+    <script src="{% static 'iCheck/icheck.min.js' %}"></script>
+    <script src="{% static 'js/smartwifi.js' %}"></script>
+    <script>
+    $(document).ready(function(){
+        var msg = "{{ msg }}";
+{#        var msg = "hello world";#}
+        console.log(typeof(msg));
+        console.log(msg);
+        var temp = msg.split(";");
+        console.log(temp);
+        if (temp.length >1){
+            msg = temp[1].slice(0,-1);
+        }
+
+        if (msg){
+            Messenger().post({
+              message: msg,
+              type: "error",
+              showCloseButton:true
+            })
+        }
+
+        $('.iradio').iCheck({
+        checkboxClass: 'icheckbox_minimal',
+        radioClass: 'iradio_minimal',
+        increaseArea: '20%' // optional
+      });
+
+    });
+    </script>
+
 {% endblock %}
 
 {% block content %}
@@ -12,26 +51,33 @@
             <form  method="post">{% csrf_token %}
                 <div class="body bg-gray">
                     <div class="form-group">
-                        <input type="text" name="username" class="form-control" placeholder="{% trans 'Username' %}"/>
+                        <input type="text" name="username" class="form-control" placeholder="{% trans 'Username' %}" required/>
                     </div>
                     <div class="form-group">
-                        <input type="text" name="email" class="form-control" placeholder="{% trans 'Email' %}"/>
+                        <input type="email" name="email" class="form-control" placeholder="{% trans 'Email' %}" required/>
                     </div>
                     <div class="form-group">
-                        <input type="password" name="password1" class="form-control" placeholder="{% trans 'Password' %}"/>
+                        <input type="password" name="password1" class="form-control" placeholder="{% trans 'Password' %}"
+                               pattern=".{5,10}" title="{% trans '5 to 10 characters' %}" required/>
                     </div>
                     <div class="form-group">
-                        <input type="password" name="password2" class="form-control" placeholder="{% trans 'Retype password' %}"/>
+                        <input type="password" name="password2" class="form-control" placeholder="{% trans 'Retype password' %}"
+                               pattern=".{5,10}" title="{% trans '5 to 10 characters' %}" required/>
+                    </div>
+                    <div class="form-group">
+                        <label class="radio-inline">
+                          <input type="radio" name="type" value="1" class="iradio"> {% trans "Agents" %}
+                        </label>
+                        <label class="radio-inline">
+                          <input type="radio" name="type" value="2" class="iradio"> {% trans "Customers" %}
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        {{ form.captcha}}
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn bg-olive btn-block">{% trans "Sign Up" %}</button>
                     </div>
-                </div>
-                <div class="footer">
-
-{#                    <button type="submit" class="btn bg-olive btn-block">{% trans "Sign Up" %}</button>#}
-
-                    <a href="{% url "login" %}" class="text-center">{% trans "I already have a membership" %}</a>
                 </div>
             </form>
 

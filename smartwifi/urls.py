@@ -10,8 +10,9 @@ urlpatterns = patterns('',
     url(r'^accounts/', include('accounts.urls')),
     url(r'^core/', include('core.urls')),
     url(r'^management/', include('management.urls')),
-    url(r'^api/', include('api.urls')),
+    url(r'^api/', include('api.urls', namespace='api')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^captcha/', include('captcha.urls')),
 )
 
 if settings.DEBUG:

@@ -93,6 +93,7 @@ def ping(request):
 
     gateway = get_object_or_404(Gateway, id=gw_id)
 
-    data = {'ssid': gateway.ssid, 'authmode': 'open', 'password': '11111111', 'channel': 'test', 'pinginterval': 10}
+    #TODO
+    data = {'ssid': 'test ssid', 'authmode': 'open', 'password': '11111111', 'channel': 'test', 'pinginterval': 10}
 
     return HttpResponse(json.dumps(data), content_type="application/json")

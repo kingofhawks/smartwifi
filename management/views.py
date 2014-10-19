@@ -293,7 +293,7 @@ class NotificationCreate(CreateView):
         # Call the base implementation first to get a context
         context = super(NotificationCreate, self).get_context_data(**kwargs)
         # Add extra context variable
-        context['title'] = _('Create Notification')
+        context['title'] = _('Create')
         context['model_name'] = _('Notifications')
         return context
 

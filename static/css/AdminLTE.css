@@ -2549,8 +2549,8 @@ Component: timeline
 
 /*TODO change color*/
 .skin-blue .navbar {
-  /*background-color: #3c8dbc;*/
-    background-color: #446280;
+  background-color: #3c8dbc;
+    /*background-color: #446280;*/
 }
 .skin-blue .navbar .nav a {
   color: rgba(255, 255, 255, 0.8);

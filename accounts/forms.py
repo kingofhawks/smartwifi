@@ -35,24 +35,31 @@ class SignupForm(forms.Form):
         use as the profile's slug.
         """
         account_type = self.cleaned_data['type']
-        print 'user type:{}'.format(account_type)
         username, email, password1, password2 = (self.cleaned_data['username'],
                                      self.cleaned_data['email'],
                                      self.cleaned_data['password1'],
                                      self.cleaned_data['password2'])
+        print 'user type:{} name:{} email:{}'.format(account_type, username, email)
+
         if password1 != password2:
             raise forms.ValidationError(_("Password not match"))
 
         try:
             existing_user = get_object_or_404(User, username=username)
+            print '1'*20
             if existing_user:
                 raise forms.ValidationError(_("Username already exists"))
+        except Http404 as e:
+            print e
 
+        try:
+            print '2'*20
             existing_user = get_object_or_404(User, email=email)
+            print 'existing_user:{} email:{}'.format(existing_user, email)
             if existing_user:
                 raise forms.ValidationError(_("Email already exists"))
-        except Http404:
-            pass
+        except Http404 as e:
+            print e
 
         new_user = User.objects.create_user(username, email, password1)
         user = authenticate(username=username, password=password1)

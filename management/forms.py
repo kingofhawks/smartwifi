@@ -9,3 +9,4 @@ class NotificationForm(ModelForm):
         widgets = {
             'content': Textarea,
         }
+        exclude = ['processed']

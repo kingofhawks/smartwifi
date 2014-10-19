@@ -63,11 +63,6 @@ def signup(request, template="accounts/account_signup.html"):
     """
     Signup form.
     """
-    if request.GET.get('newsn')=='1':
-        csn=CaptchaStore.generate_key()
-        cimageurl= captcha_image_url(csn)
-        return HttpResponse(cimageurl)
-
 
     form = SignupForm(request.POST or None)
     msg = ''
@@ -77,7 +72,6 @@ def signup(request, template="accounts/account_signup.html"):
             try:
                 new_user = form.save()
                 info(request, _("Successfully signed up"))
-                #from django.contrib.auth import authenticate
                 auth_login(request, new_user)
                 return redirect('core.dashboard')
             except forms.ValidationError as e:

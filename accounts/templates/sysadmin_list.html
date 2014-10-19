@@ -1,5 +1,5 @@
 {% extends "base_template.html" %}
-{% load i18n staticfiles %}
+{% load i18n staticfiles admin_filters%}
 
 {% block extra_css %}
     {{ block.super }}
@@ -84,7 +84,7 @@
             {% for p in sysadmins %}
                 <tr data-row-key="{{ p.id }}">
                     <td>{{ p.user.username }}</td>
-                    <td>{{ p.super_admin }}</td>
+                    <td>{{ p.super_admin |yes_no}}</td>
                     <td>{{ p.phone }}</td>
                     <td>{{ p.email }}</td>
                     <td>

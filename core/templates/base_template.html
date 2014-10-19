@@ -22,6 +22,7 @@
 {#        <link href="css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />#}
         <!-- Theme style -->
         <link href="{% static 'css/AdminLTE.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'hint.css/hint.min.css' %}" rel="stylesheet"/>
 {#        <link rel="stylesheet" href="{% static 'css/freelancer.css' %}" />#}
 
         {% block extra_css %}{% endblock %}
@@ -49,24 +50,24 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </a>
-                <div class="navbar-left">
-                    <ul class="nav navbar-nav">
-                        <!-- Notifications: style can be found in dropdown.less -->
-                        <li >
-                            <a href="{% url 'core.index' %}">{% trans "Home" %}</a>
-                        </li>
-                        <li class="page-scroll">
-                            <a href="#portfolio">{% trans "Services" %}</a>
-                        </li>
-                        <li class="page-scroll">
-                            <a href="#about">{% trans "Help" %}</a>
-                        </li>
-                        <li class="page-scroll">
-                            <a href="#contact">{% trans "Contace" %}</a>
-                        </li>
-
-                    </ul>
-                </div>
+{#                <div class="navbar-left">#}
+{#                    <ul class="nav navbar-nav">#}
+{#                        <!-- Notifications: style can be found in dropdown.less -->#}
+{#                        <li >#}
+{#                            <a href="{% url 'core.index' %}">{% trans "Home" %}</a>#}
+{#                        </li>#}
+{#                        <li class="page-scroll">#}
+{#                            <a href="#portfolio">{% trans "Services" %}</a>#}
+{#                        </li>#}
+{#                        <li class="page-scroll">#}
+{#                            <a href="#about">{% trans "Help" %}</a>#}
+{#                        </li>#}
+{#                        <li class="page-scroll">#}
+{#                            <a href="#contact">{% trans "Contace" %}</a>#}
+{#                        </li>#}
+{##}
+{#                    </ul>#}
+{#                </div>#}
                 <div class="navbar-right">
                     <ul class="nav navbar-nav">
                         <!-- Notifications: style can be found in dropdown.less -->
@@ -97,7 +98,7 @@
                                 <li class="user-header bg-light-blue">
                                     <img src="img/avatar3.png" class="img-circle" alt="User Image" />
                                     <p>
-                                        {{ user }} - Web Developer
+                                        {{ user }}
                                         <small>{% trans "Member since" %} : {{ user.date_joined }}</small>
                                     </p>
                                 </li>
@@ -238,7 +239,7 @@
         <script id="notification-template" type="text/x-handlebars-template">
         {% verbatim %}
             <li>
-                <span class="text"><a href="{{ url }}">{{ title }}</a></span>
+                <span class="text"><a href="{{ url }}"><span class="hint--right" data-hint="{{ content }}">{{ title }}</span></a></span>
                 <small class="label label-danger"><i class="fa fa-clock-o"></i> {{ badge }}</small>
                 <div class="tools">
                 </div>
@@ -250,7 +251,7 @@
         {% verbatim %}
             <li>
                 <a href="{{ url }}">
-                    <i class="ion info"></i>{{ title }}
+                    <i class="ion info"></i><span class="hint--right" data-hint="{{ content }}">{{ title }}</span>
                 </a>
             </li>
         {% endverbatim %}
@@ -284,7 +285,7 @@
 {#                    moment().locale("zh-cn")#}
 {#                    console.log(moment(element.fields.date));#}
                     var badge = moment(element.fields.date).fromNow();
-                    var context = {title: element.fields.title, url: url, badge: badge}
+                    var context = {title: element.fields.title, url: url, badge: badge, content: element.fields.content}
 
                     if (index <=4){
                         var html    = template(context);

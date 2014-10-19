@@ -71,7 +71,7 @@ class SmsTemplate(models.Model):
 class WifiClient(models.Model):
     gateway = models.ForeignKey(Gateway)
     username = models.CharField(verbose_name=_('Username'), max_length=256)
-    phone = models.CharField(verbose_name=_('Phone'), max_length=11, blank=True, null=True)
+    phone = models.CharField(verbose_name=_('Phone'), max_length=11, blank=True, null=True, default='')
     mac = models.CharField(verbose_name=_('Mac'), max_length=128, blank=True, null=True)
     ip = models.CharField(verbose_name=_('IP'), max_length=64, blank=True, null=True)
     weixin = models.CharField(verbose_name=_('WeiXin'), max_length=128, blank=True, null=True)
@@ -124,6 +124,8 @@ def create_notifications(sender, instance, **kwargs):
             customers = Customer.objects.all()
             print list(customers)
             for customer in customers:
-                notification = Notification(content=instance.content, creator=instance.creator, target=customer.user,date=instance.date)
+                notification = Notification(title=instance.title,
+                                            content=instance.content,
+                                            creator=instance.creator, target=customer.user, date=instance.date)
                 notification.save()
 

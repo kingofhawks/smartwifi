@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-12 22:27-0700\n"
+"POT-Creation-Date: 2014-10-17 16:21+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,66 +22,92 @@ msgstr ""
 msgid "SmartWifi"
 msgstr "智慧无线"
 
-#: .\templates\base_template.html:60
-msgid "You have"
-msgstr "您有"
-
-#: .\templates\base_template.html:60 .\templates\dashboard.html:107
-msgid "Notifications"
-msgstr "通知"
-
-#: .\templates\base_template.html:66
-msgid "View all"
-msgstr "查看所有"
-
-#: .\templates\base_template.html:122 .\templates\base_template.html.py:179
-#: .\templates\dashboard.html:11 .\templates\index.html:60
+#: .\templates\base_template.html:57 .\templates\dashboard.html:11
+#: .\templates\index.html:60
 msgid "Home"
 msgstr "首页"
 
-#: .\templates\base_template.html:127 .\templates\core_base.html:74
+#: .\templates\base_template.html:60 .\templates\index.html:63
+#: .\templates\index.html.py:131
+msgid "Services"
+msgstr "服务"
+
+#: .\templates\base_template.html:63 .\templates\index.html:66
+msgid "Help"
+msgstr "帮助中心"
+
+#: .\templates\base_template.html:66 .\templates\index.html:69
+msgid "Contace"
+msgstr "联系我们"
+
+#: .\templates\base_template.html:80
+msgid "You have"
+msgstr "您有"
+
+#: .\templates\base_template.html:80 .\templates\dashboard.html:107
+msgid "Notifications"
+msgstr "通知"
+
+#: .\templates\base_template.html:86
+msgid "View all"
+msgstr "查看所有"
+
+#: .\templates\base_template.html:102
+msgid "Member since"
+msgstr "注册时间"
+
+#: .\templates\base_template.html:109
+msgid "Profile"
+msgstr "设置"
+
+#: .\templates\base_template.html:112 .\templates\core_base.html:102
+#: .\templates\index.html:92
+msgid "Sign Out"
+msgstr "退出"
+
+#: .\templates\base_template.html:134
+msgid "Dashboard"
+msgstr "仪表盘"
+
+#: .\templates\base_template.html:140 .\templates\core_base.html:74
 #: .\templates\dashboard_1011.html:151
 msgid "System Admin"
 msgstr "系统管理员"
 
-#: .\templates\base_template.html:132 .\templates\core_base.html:77
+#: .\templates\base_template.html:147 .\templates\core_base.html:77
 #: .\templates\dashboard.html:27 .\templates\dashboard_1011.html:156
 #: .\templates\dashboard_1011.html:290
 msgid "Agents"
 msgstr "代理"
 
-#: .\templates\base_template.html:137 .\templates\core_base.html:80
+#: .\templates\base_template.html:154 .\templates\core_base.html:80
 #: .\templates\dashboard.html:47 .\templates\dashboard_1011.html:161
 #: .\templates\dashboard_1011.html:309
 msgid "Customers"
 msgstr "商户"
 
-#: .\templates\base_template.html:142 .\templates\core_base.html:82
+#: .\templates\base_template.html:160 .\templates\core_base.html:82
 #: .\templates\dashboard_1011.html:166
 msgid "Gateway Management"
 msgstr "网关管理"
 
-#: .\templates\base_template.html:147 .\templates\dashboard.html:85
+#: .\templates\base_template.html:165 .\templates\dashboard.html:85
 #: .\templates\dashboard_1011.html:171 .\templates\dashboard_1011.html:347
 msgid "Clients"
 msgstr "用户"
 
-#: .\templates\base_template.html:153 .\templates\base_template.html.py:157
+#: .\templates\base_template.html:171 .\templates\base_template.html.py:175
 #: .\templates\core_base.html:84
 msgid "AD Management"
 msgstr "广告管理"
 
-#: .\templates\base_template.html:158
+#: .\templates\base_template.html:176
 msgid "AD Statistics"
 msgstr "广告统计"
 
-#: .\templates\base_template.html:163 .\templates\core_base.html:85
+#: .\templates\base_template.html:181 .\templates\core_base.html:85
 msgid "Market Management"
 msgstr "营销管理"
-
-#: .\templates\base_template.html:180
-msgid "Dashboard"
-msgstr "仪表盘"
 
 #: .\templates\core_base.html:83
 msgid "Client Stats"
@@ -94,10 +120,6 @@ msgstr "通知"
 #: .\templates\core_base.html:100
 msgid "Settings"
 msgstr "设置"
-
-#: .\templates\core_base.html:102
-msgid "Sign Out"
-msgstr "退出"
 
 #: .\templates\core_base.html:153
 msgid "Powered by"
@@ -141,19 +163,14 @@ msgstr "广告管理"
 msgid "Market Mangement"
 msgstr "营销管理"
 
-#: .\templates\index.html:63 .\templates\index.html.py:114
-msgid "Services"
-msgstr "服务"
-
-#: .\templates\index.html:66
-msgid "Help"
-msgstr "帮助中心"
-
-#: .\templates\index.html:69
-msgid "Contace"
-msgstr "联系我们"
-
-#: .\templates\index.html:72
+#: .\templates\index.html:73 .\templates\index.html.py:75
 msgid "Cloud Management"
 msgstr "云端管理"
 
+#: .\templates\index.html:96
+msgid "Log in"
+msgstr "登录"
+
+#: .\templates\index.html:99
+msgid "Sign up"
+msgstr "注册"

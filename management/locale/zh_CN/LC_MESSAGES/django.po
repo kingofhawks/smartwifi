@@ -58,7 +58,7 @@ msgstr "MAC地址"
 
 #: .\models.py:33
 msgid "Customer"
-msgstr ""
+msgstr "商户"
 
 #: .\models.py:40
 msgid "text_ad"

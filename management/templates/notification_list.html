@@ -1,5 +1,5 @@
 {% extends "base_template.html" %}
-{% load i18n staticfiles%}
+{% load i18n staticfiles admin_filters %}
 
 {% block extra_css %}
     {{ block.super }}
@@ -85,7 +85,7 @@
                     <td>{{ p.title }}</td>
                     <td>{{ p.content }}</td>
                     <td>{{ p.date }}</td>
-                    <td>{{ p.target }}</td>
+                    <td>{{ p.target |notification_target}}</td>
                     <td>{{ p.creator }}</td>
                     <td>
                         <a href="{% url 'management.notification.update' pk=p.id %}"><i class="fa fa-edit"></i></a> &nbsp;

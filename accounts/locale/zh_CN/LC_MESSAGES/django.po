@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-15 13:36+0800\n"
+"POT-Creation-Date: 2014-10-17 13:26+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,58 +17,70 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: .\forms.py:17 .\forms.py:55 .\forms.py:83 .\models.py:10
+#: .\forms.py:16 .\models.py:42
+msgid "Agent"
+msgstr "代理"
+
+#: .\forms.py:16
+msgid "Second"
+msgstr ""
+
+#: .\forms.py:20 .\forms.py:85 .\forms.py:115 .\models.py:10
 #: .\templates\accounts\account_login.html:45
-#: .\templates\accounts\account_signup.html:43 .\templates\agent_list.html:73
+#: .\templates\accounts\account_signup.html:54 .\templates\agent_list.html:73
 #: .\templates\company_list.html:69 .\templates\customer_list.html:73
-#: .\templates\sysadmin_list.html:79 .\templates\sysadmin_list_backup.html:69
+#: .\templates\sysadmin_list.html:81 .\templates\sysadmin_list_backup.html:69
 msgid "Username"
 msgstr "用户名"
 
-#: .\forms.py:18 .\models.py:15 .\templates\accounts\account_signup.html:46
+#: .\forms.py:21 .\models.py:15 .\templates\accounts\account_signup.html:57
 #: .\templates\agent_list.html:75 .\templates\company_list.html:72
 #: .\templates\customer_list.html:75 .\templates\email\account_approve.html:6
-#: .\templates\email\account_approve.txt:6 .\templates\sysadmin_list.html:82
+#: .\templates\email\account_approve.txt:6 .\templates\sysadmin_list.html:84
 #: .\templates\sysadmin_list_backup.html:72
 msgid "Email"
 msgstr "电子邮件"
 
-#: .\forms.py:20
+#: .\forms.py:23
 msgid "Create password"
 msgstr "密码"
 
-#: .\forms.py:22
+#: .\forms.py:25
 msgid "Repeat password"
 msgstr "确认密码"
 
-#: .\forms.py:37
+#: .\forms.py:44
 msgid "Password not match"
 msgstr "密码不匹配"
 
-#: .\forms.py:42
+#: .\forms.py:49
 msgid "Username already exists"
 msgstr "用户名已存在"
 
-#: .\forms.py:56 .\models.py:11 .\templates\accounts\account_login.html:48
-#: .\templates\accounts\account_signup.html:49
+#: .\forms.py:53
+msgid "Email already exists"
+msgstr "邮件地址已注册"
+
+#: .\forms.py:86 .\models.py:11 .\templates\accounts\account_login.html:48
+#: .\templates\accounts\account_signup.html:60
 msgid "Password"
 msgstr "密码"
 
-#: .\forms.py:71
+#: .\forms.py:103
 msgid "Invalid username/email and password"
 msgstr "用户名或密码错误"
 
-#: .\forms.py:73
+#: .\forms.py:105
 msgid "Your account is inactive"
 msgstr "帐号尚未激活"
 
-#: .\forms.py:92
+#: .\forms.py:124
 msgid "Invalid username/email"
 msgstr ""
 
 #: .\models.py:13 .\templates\agent_list.html:74
 #: .\templates\company_list.html:71 .\templates\customer_list.html:74
-#: .\templates\sysadmin_list.html:81 .\templates\sysadmin_list_backup.html:71
+#: .\templates\sysadmin_list.html:83 .\templates\sysadmin_list_backup.html:71
 msgid "Phone"
 msgstr ""
 
@@ -116,32 +128,28 @@ msgstr "短信模板"
 msgid "Comment"
 msgstr "备注"
 
-#: .\models.py:32 .\templates\company_list.html:70
-#: .\templates\sysadmin_list.html:80 .\templates\sysadmin_list_backup.html:70
+#: .\models.py:33 .\templates\company_list.html:70
+#: .\templates\sysadmin_list.html:82 .\templates\sysadmin_list_backup.html:70
 msgid "Super Admin"
 msgstr "超级管理员"
 
-#: .\models.py:36 .\models.py:40
+#: .\models.py:37 .\models.py:41
 msgid "Full Name"
 msgstr "全名"
 
-#: .\models.py:41
-msgid "Agent"
-msgstr ""
-
-#: .\templates\accounts\account_login.html:52
+#: .\templates\accounts\account_login.html:55
 #: .\templates\accounts\account_signup_backup.html:26
 msgid "Log In"
 msgstr "登录"
 
-#: .\templates\accounts\account_login.html:53
+#: .\templates\accounts\account_login.html:56
 #: .\templates\accounts\account_login1012.html:40
 msgid "I forgot my password"
 msgstr "忘记密码"
 
-#: .\templates\accounts\account_login.html:61
+#: .\templates\accounts\account_login.html:64
 #: .\templates\accounts\account_login_backup.html:54
-#: .\templates\accounts\account_signup.html:57
+#: .\templates\accounts\account_signup.html:79
 msgid "Sign Up"
 msgstr "注册"
 
@@ -174,27 +182,35 @@ msgid ""
 "you'll need to log out first."
 msgstr ""
 
-#: .\templates\accounts\account_password_reset.html:6
-msgid ""
-"Enter your username or email address and you'll receive an email with a link "
-"you need to click, in order to log in and change your password."
-msgstr ""
+#: .\templates\accounts\account_password_reset.html:45
+msgid "Enter your username or Email"
+msgstr "输入用户名或密码"
+
+#: .\templates\accounts\account_password_reset.html:48
+msgid "Find Password"
+msgstr "找回密码"
 
 #: .\templates\accounts\account_profile.html:14
 msgid "User"
 msgstr "用户名"
 
-#: .\templates\accounts\account_signup.html:50
-#: .\templates\accounts\account_signup.html:54
-msgid "6 to 10 characters"
-msgstr "6到10位字符"
+#: .\templates\accounts\account_signup.html:61
+#: .\templates\accounts\account_signup.html:65
+msgid "5 to 10 characters"
+msgstr "5到10位字符"
 
-#: .\templates\accounts\account_signup.html:53
+#: .\templates\accounts\account_signup.html:64
 msgid "Retype password"
 msgstr "确认密码"
 
-#: .\templates\accounts\account_signup.html:64
-msgid "I already have a membership"
+#: .\templates\accounts\account_signup.html:69 .\templates\agent_list.html:62
+#: .\views.py:240
+msgid "Agents"
+msgstr ""
+
+#: .\templates\accounts\account_signup.html:72
+#: .\templates\customer_list.html:62 .\views.py:281
+msgid "Customers"
 msgstr ""
 
 #: .\templates\accounts\account_signup_backup.html:36
@@ -229,7 +245,7 @@ msgid "Log out"
 msgstr ""
 
 #: .\templates\accounts\includes\user_panel.html:20
-#: .\templates\accounts\includes\user_panel_nav.html:14 .\views.py:47
+#: .\templates\accounts\includes\user_panel_nav.html:14 .\views.py:58
 msgid "Log in"
 msgstr "登录"
 
@@ -238,7 +254,7 @@ msgid "or"
 msgstr ""
 
 #: .\templates\accounts\includes\user_panel.html:23
-#: .\templates\accounts\includes\user_panel_nav.html:16 .\views.py:91
+#: .\templates\accounts\includes\user_panel_nav.html:16 .\views.py:90
 msgid "Sign up"
 msgstr "注册"
 
@@ -254,19 +270,15 @@ msgstr ""
 msgid "Profile information"
 msgstr ""
 
-#: .\templates\agent_list.html:62
-msgid "Agents"
-msgstr ""
-
 #: .\templates\agent_list.html:69 .\templates\company_list.html:60
-#: .\templates\customer_list.html:69 .\templates\sysadmin_list.html:74
-#: .\templates\sysadmin_list_backup.html:60 .\views.py:168 .\views.py:208
-#: .\views.py:248
+#: .\templates\customer_list.html:69 .\templates\sysadmin_list.html:76
+#: .\templates\sysadmin_list_backup.html:60 .\views.py:198 .\views.py:239
+#: .\views.py:280
 msgid "Create"
 msgstr ""
 
 #: .\templates\agent_list.html:76 .\templates\customer_list.html:76
-#: .\templates\sysadmin_list.html:83
+#: .\templates\sysadmin_list.html:85
 msgid "Operations"
 msgstr ""
 
@@ -276,10 +288,6 @@ msgstr ""
 
 #: .\templates\company_list.html:62 .\templates\sysadmin_list_backup.html:62
 msgid "Delete"
-msgstr ""
-
-#: .\templates\customer_list.html:62
-msgid "Customers"
 msgstr ""
 
 #: .\templates\email\account_approve.html:3
@@ -347,50 +355,78 @@ msgstr ""
 msgid "Activate your account"
 msgstr ""
 
-#: .\templates\sysadmin_list.html:62 .\templates\sysadmin_list.html.py:70
+#: .\templates\sysadmin_list.html:3
+msgid "Yes"
+msgstr "是"
+
+#: .\templates\sysadmin_list.html:4
+msgid "No"
+msgstr "否"
+
+#: .\templates\sysadmin_list.html:64 .\templates\sysadmin_list.html.py:72
+#: .\views.py:199
 msgid "System Admin"
 msgstr ""
 
-#: .\templates\sysadmin_list.html:63
+#: .\templates\sysadmin_list.html:65
 msgid "Administrators"
 msgstr ""
 
-#: .\views.py:64
+#: .\views.py:55 .\views.py:88
+msgid "Invalid Captcha"
+msgstr "无效验证码"
+
+#: .\views.py:79
 msgid "Successfully signed up"
 msgstr ""
 
-#: .\views.py:127
+#: .\views.py:104
+msgid "User does not exist"
+msgstr ""
+
+#: .\views.py:112
+msgid "Password Reset Mail"
+msgstr "密码重置邮件"
+
+#: .\views.py:114
+msgid "Check your Email for password reset link"
+msgstr "密码重置链接已发送至您的邮箱"
+
+#: .\views.py:157
 msgid "Agent updated"
 msgstr ""
 
-#: .\views.py:128
+#: .\views.py:158
 msgid "Update Agent"
 msgstr "代理编辑"
 
-#: .\views.py:135
+#: .\views.py:165
 msgid "Customer updated"
 msgstr ""
 
-#: .\views.py:136
+#: .\views.py:166
 msgid "Update Customer"
 msgstr "商户编辑"
 
-#: .\views.py:144
+#: .\views.py:174
 msgid "SysAdmin updated"
 msgstr "系统管理员编辑"
 
-#: .\views.py:145
+#: .\views.py:175
 msgid "Update SysAdmin"
 msgstr "系统管理员编辑"
 
-#: .\views.py:181
+#: .\views.py:212
 msgid "Modify SysAdmin"
 msgstr "系统管理员编辑"
 
-#: .\views.py:221
+#: .\views.py:253
 msgid "Modify Agent"
 msgstr "代理编辑"
 
-#: .\views.py:261
+#: .\views.py:294
 msgid "Modify Customer"
 msgstr "商户编辑"
+
+#~ msgid "Search"
+#~ msgstr "找回密码"

@@ -196,6 +196,7 @@ class SysAdminCreate(CreateView):
 
 class SysAdminUpdate(UpdateView):
     model = SysAdmin
+    form_class = SysAdminForm
     template_name = 'create_project.html'
     success_url = reverse_lazy('accounts.sysadmins')
 
@@ -237,6 +238,7 @@ class AgentCreate(CreateView):
 
 class AgentUpdate(UpdateView):
     model = Agent
+    form_class = AgentForm
     template_name = 'create_project.html'
     success_url = reverse_lazy('accounts.agents')
 
@@ -278,6 +280,7 @@ class CustomerCreate(CreateView):
 
 class CustomerUpdate(UpdateView):
     model = Customer
+    form_class = CustomerForm
     template_name = 'create_project.html'
     success_url = reverse_lazy('accounts.customers')
 

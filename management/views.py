@@ -15,6 +15,7 @@ from django.core import serializers
 from django.core.serializers.json import DjangoJSONEncoder
 from datetime import datetime, date, time, timedelta
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 
 class GatewayList(ListView):
@@ -79,7 +80,7 @@ class AdDetail(DetailView):
 
         #Create AD stats record
         print self.object
-        stat = AdStat(ad=self.object, showtime=datetime.today())
+        stat = AdStat(ad=self.object, showtime=timezone.now())
         stat.save()
 
         return context
@@ -125,6 +126,8 @@ class AdStatsList(ListView):
     context_object_name = 'stats'
 
     def get_queryset(self):
+        print '1'*10
+        print datetime.today()
         mode = self.request.GET.get('mode')
         print 'mode:{}'.format(mode)
         if mode is None or mode == 'today':
@@ -165,12 +168,12 @@ class AdStatsList(ListView):
             print today_min, today_max
             return AdStat.objects.filter(showtime__range=(today_min, today_max))
 
-
-            # Invoice.objects.get(user=user, date__range=(today_min, today_max))
         return AdStat.objects.all()
 
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
+        print '2'*10
+        print datetime.today()
         context = super(AdStatsList, self).get_context_data(**kwargs)
         # Add in a QuerySet of all the books
         # context['title'] = _('Create')
@@ -215,7 +218,8 @@ class AdStatsList(ListView):
         # context['stats'] = stats
         context['stats_json'] = json_data
         context['mode'] = mode
-
+        print '3'*10
+        print datetime.today()
         return context
 
 
@@ -268,7 +272,7 @@ class NotificationList(ListView):
         print self.request.user
         groups = self.request.user.groups.values_list('name', flat=True)
         print groups
-        if 'SuperAdminGroup' in groups or 'AdminGroup' in groups:
+        if self.request.user.is_superuser or 'SuperAdminGroup' in groups or 'AdminGroup' in groups:
             return Notification.objects.filter(processed=False)
         else:
             return Notification.objects.filter(processed=False, target=self.request.user)
@@ -300,6 +304,7 @@ class NotificationCreate(CreateView):
 
 class NotificationUpdate(UpdateView):
     model = Notification
+    form_class = NotificationForm
     template_name = 'create_project.html'
     success_url = reverse_lazy('management.notifications')
 
@@ -322,9 +327,18 @@ class NotificationDetail(DetailView):
     template_name = 'notification_detail.html'
 
 
+def process_notification(request, pk):
+    print pk
+    notification = Notification.objects.get(pk=pk)
+    print notification
+    notification.processed = True
+    notification.save()
+    return HttpResponse(json.dumps('OK'), content_type='application/json')
+
+
 def notification_data(request):
     groups = request.user.groups.values_list('name', flat=True)
-    if 'SuperAdminGroup' in groups or 'AdminGroup' in groups:
+    if request.user.is_superuser or 'SuperAdminGroup' in groups or 'AdminGroup' in groups:
         query_set = Notification.objects.filter(processed=False).order_by('-date')
     else:
         query_set = Notification.objects.filter(processed=False, target=request.user).order_by('-date')

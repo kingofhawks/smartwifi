@@ -10,6 +10,7 @@ urlpatterns = patterns('',
     url(r'^notification/(?P<pk>\d+)/$', login_required(views.NotificationUpdate.as_view()), name='management.notification.update'),
     url(r'^notification/(?P<pk>\d+)/delete/$', login_required(views.NotificationDelete.as_view()), name='management.notification.delete'),
     url(r'^notification/(?P<pk>\d+)/detail/$', login_required(views.NotificationDetail.as_view()), name='management.notification.detail'),
+    url(r'^notification/(?P<pk>\d+)/process/$', views.process_notification, name='management.notification.process'),
 
     #gateway
     url(r'^gateways', login_required(views.GatewayList.as_view()), name='management.gateways'),

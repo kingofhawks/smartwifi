@@ -12,6 +12,7 @@ from models import Customer, Agent, SysAdmin
 from django.shortcuts import get_object_or_404
 from django.http import Http404
 from captcha.fields import CaptchaField
+from django.core.exceptions import ValidationError
 
 TYPE_CHOICES = (('1', _('Agent'),), ('2', _('Second'),))
 
@@ -151,16 +152,27 @@ class UserForm(ModelForm):
 class SysAdminForm(ModelForm):
     class Meta:
         model = SysAdmin
-        exclude = ['user']
+        exclude = ['user', 'signup_flag']
         widgets = {
             'password': forms.PasswordInput(),
         }
+
+    #customized form validation
+    def clean(self):
+        username = self.cleaned_data.get('username')
+        try:
+            get_object_or_404(SysAdmin, username=username)
+            raise ValidationError(_("Username already exists"))
+        except Http404:
+            pass
+
+        return self.cleaned_data
 
 
 class AgentForm(ModelForm):
     class Meta:
         model = Agent
-        exclude = ['user']
+        exclude = ['user', 'signup_flag']
         widgets = {
             'password': forms.PasswordInput(),
         }
@@ -169,7 +181,7 @@ class AgentForm(ModelForm):
 class CustomerForm(ModelForm):
     class Meta:
         model = Customer
-        exclude = ['user']
+        exclude = ['user', 'signup_flag']
         widgets = {
             'password': forms.PasswordInput(),
         }

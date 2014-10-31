@@ -1,19 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404, render_to_response, get_list_or_404
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.views.generic import ListView, DetailView
-from django.views.generic.edit import UpdateView, CreateView, DeleteView
-from django.utils.translation import ugettext as _
 import json
 from django.http import HttpResponse, HttpResponseRedirect, Http404
-from django.contrib.auth.decorators import login_required
-from django.contrib.messages import info, warning
-from django.core.urlresolvers import reverse, reverse_lazy
-from django.utils.safestring import mark_safe
-from django.core import serializers
-from django.core.serializers.json import DjangoJSONEncoder
 from datetime import datetime, date, time, timedelta
-from django.contrib.auth.models import User
-from management.models import Gateway, WifiClient
+from management.models import Gateway, WifiClient, Ad, AdStat
+from django.utils import timezone
 
 
 def login(request):
@@ -97,3 +87,23 @@ def ping(request):
     data = {'ssid': 'test ssid', 'authmode': 'open', 'password': '11111111', 'channel': 'test', 'pinginterval': 10}
 
     return HttpResponse(json.dumps(data), content_type="application/json")
+
+
+def login_ad(request):
+    images = []
+    result = {}
+    ads = Ad.objects.all()
+    for ad in ads:
+        if ad.ad_img:
+            images.append(ad)
+
+    if len(images) > 0:
+        import random
+        ad = images[random.randint(0, len(images)-1)]
+        result['content'] = ad.ad_text
+        result['image'] = ad.ad_img.url
+
+        stat = AdStat(ad=ad, showtime=timezone.now())
+        stat.save()
+
+    return HttpResponse(json.dumps(result), content_type="application/json")

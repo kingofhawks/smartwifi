@@ -27,30 +27,37 @@
         });
        var selected = [];
 
-    $('#table tbody').on( 'click', 'tr', function () {
-        $(this).toggleClass('selected');
-        var id = $(this).data("rowKey");
-        var index = $.inArray(id, selected);
-        if ( index === -1 ) {
-            selected.push( id );
-        } else {
-            selected.splice( index, 1 );
-        }
-        console.log(selected);
-    } );
+{#    $('#table tbody').on( 'click', 'tr', function () {#}
+{#        $(this).toggleClass('selected');#}
+{#        var id = $(this).data("rowKey");#}
+{#        var index = $.inArray(id, selected);#}
+{#        if ( index === -1 ) {#}
+{#            selected.push( id );#}
+{#        } else {#}
+{#            selected.splice( index, 1 );#}
+{#        }#}
+{#        console.log(selected);#}
+{#    } );#}
 
-        $("#modify").click(function(){
-            //a trick to pass JS variable to django url template tag
-            var url = "{% url 'management.notification.update' pk=99999 %}";
-            url = url.replace(/99999/,selected[0]);
-            window.location.href = url;
-        });
+        $(".process").click(function(){
+            var id = $(this).data("rowId");
+            console.log(id);
 
-        $("#delete").click(function(){
             //a trick to pass JS variable to django url template tag
-            var url = "{% url 'management.notification.delete' pk=99999 %}";
-            url = url.replace(/99999/,selected[0]);
-            window.location.href = url;
+            var url = "{% url 'management.notification.process' pk=99999 %}";
+            url = url.replace(/99999/,id);
+            console.log(url);
+            $.get(url, function(data){
+                console.log(data);
+                if (data === 'OK'){
+                    Messenger().post({
+                      message: "{% trans 'Processed' %}",
+                      type: "info",
+                      showCloseButton:true
+                    })
+                }
+            })
+{#            window.location.href = url;#}
         });
     });
     </script>
@@ -60,7 +67,7 @@
 {% block content-header %}
 <h1>
     {% trans "Notifications" %}
-    <small>notification</small>
+    <small></small>
 </h1>
 {% endblock %}
 
@@ -73,7 +80,7 @@
 <table class="table table-hover table-bordered" id="table">
     <thead>
         <th>{% trans "Title" %}</th>
-        <th>{% trans "Content" %}</th>
+        <th style="width: 50%">{% trans "Content" %}</th>
         <th>{% trans "Date" %}</th>
         <th>{% trans "Target" %}</th>
         <th>{% trans "Creator" %}</th>
@@ -89,7 +96,8 @@
                     <td>{{ p.creator }}</td>
                     <td>
                         <a href="{% url 'management.notification.update' pk=p.id %}"><i class="fa fa-edit"></i></a> &nbsp;
-                        <a href="{% url 'management.notification.delete' pk=p.id %}"><i class="fa fa-trash"></i></a>
+                        <a href="{% url 'management.notification.delete' pk=p.id %}"><i class="fa fa-trash"></i></a> &nbsp;
+                        <a class="process" href="#" data-row-id="{{ p.id }}"><i class="fa fa-check"></i></a>
                     </td>
             </tr>
         {% endfor %}

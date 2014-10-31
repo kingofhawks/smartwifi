@@ -1,10 +1,10 @@
 {% extends "index.html" %}
 {% load i18n staticfiles%}
 {% block extra_css %}
-<link href="{% static 'css/AdminLTE.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/AdminLTE.css' %}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="{% static 'messenger/build/css/messenger.css' %}">
     <link rel="stylesheet" href="{% static 'messenger/build/css/messenger-theme-future.css' %}">
-    <link rel="stylesheet" href="{% static 'iCheck/skins/minimal/minimal.css' %}">
+    <link rel="stylesheet" href="{% static 'iCheck/skins/square/green.css' %}">
 {% endblock %}
 
 {% block extra_js %}
@@ -32,9 +32,15 @@
             })
         }
 
-        $('.iradio').iCheck({
-        checkboxClass: 'icheckbox_minimal',
-        radioClass: 'iradio_minimal',
+{#        $('.iradio').iCheck({#}
+{#        checkboxClass: 'icheckbox_square-green',#}
+{#        radioClass: 'iradio_square-green',#}
+{#        increaseArea: '20%' // optional#}
+{#      });#}
+
+        $('input[type="radio"]').iCheck({
+        checkboxClass: 'icheckbox_square-green',
+        radioClass: 'iradio_square-green',
         increaseArea: '20%' // optional
       });
 
@@ -66,7 +72,7 @@
                     </div>
                     <div class="form-group">
                         <label class="radio-inline">
-                          <input type="radio" name="type" value="1" class="iradio"> {% trans "Agents" %}
+                          <input type="radio" name="type" value="1" class="iradio" checked> {% trans "Agents" %}
                         </label>
                         <label class="radio-inline">
                           <input type="radio" name="type" value="2" class="iradio"> {% trans "Customers" %}

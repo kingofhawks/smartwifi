@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-14 15:13+0800\n"
+"POT-Creation-Date: 2014-10-23 08:40+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,130 +17,130 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: .\models.py:13 .\templates\notification_detail.html:12
-#: .\templates\notification_list.html:75
+#: .\models.py:15 .\templates\notification_detail.html:12
+#: .\templates\notification_list.html:82
 msgid "Title"
 msgstr "标题"
 
-#: .\models.py:14 .\templates\notification_detail.html:13
-#: .\templates\notification_list.html:76
+#: .\models.py:16 .\templates\notification_detail.html:13
+#: .\templates\notification_list.html:83
 msgid "Content"
 msgstr "内容"
 
-#: .\models.py:15 .\templates\notification_list.html:79
+#: .\models.py:17 .\templates\notification_list.html:86
 msgid "Creator"
 msgstr "发布人"
 
-#: .\models.py:16 .\templates\notification_list.html:78
+#: .\models.py:18 .\templates\notification_list.html:85
 msgid "Target"
 msgstr "对象"
 
-#: .\models.py:17
+#: .\models.py:19 .\templates\notification_list.html:54
 msgid "Processed"
 msgstr "已处理"
 
-#: .\models.py:18 .\templates\notification_detail.html:14
-#: .\templates\notification_list.html:77
+#: .\models.py:20 .\templates\notification_detail.html:14
+#: .\templates\notification_list.html:84
 msgid "Date"
 msgstr "日期"
 
-#: .\models.py:21
+#: .\models.py:23
 msgid "Notification"
 msgstr "通知"
 
-#: .\models.py:31 .\templates\gateway_list.html:73
+#: .\models.py:33 .\templates\gateway_list.html:73
 msgid "Gateway Name"
 msgstr "网关名称"
 
-#: .\models.py:32 .\models.py:75 .\templates\gateway_list.html:74
+#: .\models.py:34 .\models.py:77 .\templates\gateway_list.html:74
 msgid "Mac"
 msgstr "MAC地址"
 
-#: .\models.py:33
+#: .\models.py:35
 msgid "Customer"
 msgstr "商户"
 
-#: .\models.py:40
+#: .\models.py:42
 msgid "text_ad"
 msgstr "图片广告"
 
-#: .\models.py:41
+#: .\models.py:43
 msgid "img_ad"
 msgstr "图文广告"
 
-#: .\models.py:46 .\templates\ad_detail.html:12 .\templates\ad_list.html:82
+#: .\models.py:48 .\templates\ad_detail.html:12 .\templates\ad_list.html:82
 msgid "Ad Type"
 msgstr "广告类别"
 
-#: .\models.py:47
+#: .\models.py:49
 msgid "AD Img"
 msgstr "广告图片"
 
-#: .\models.py:48 .\templates\ad_detail.html:18
+#: .\models.py:50 .\templates\ad_detail.html:18
 msgid "Ad Text"
 msgstr "图文内容"
 
-#: .\models.py:56
+#: .\models.py:58
 msgid "ShowTime"
 msgstr "展示时间"
 
-#: .\models.py:57
+#: .\models.py:59
 msgid "Count"
 msgstr "广告展示次数"
 
-#: .\models.py:64 .\templates\sms_template_list.html:73
+#: .\models.py:66 .\templates\sms_template_list.html:73
 msgid "Template Name"
 msgstr "模板名称"
 
-#: .\models.py:65
+#: .\models.py:67
 msgid "SmsTemplate"
 msgstr "短信模板"
 
-#: .\models.py:73 .\templates\client_list.html:43
+#: .\models.py:75 .\templates\client_list.html:43
 msgid "Username"
 msgstr "用户名"
 
-#: .\models.py:74 .\templates\client_list.html:44
+#: .\models.py:76 .\templates\client_list.html:44
 msgid "Phone"
 msgstr "手机号"
 
-#: .\models.py:76 .\templates\client_list.html:46
+#: .\models.py:78 .\templates\client_list.html:46
 msgid "IP"
 msgstr "IP地址"
 
-#: .\models.py:77
+#: .\models.py:79
 msgid "WeiXin"
 msgstr "微信"
 
-#: .\models.py:78
+#: .\models.py:80
 msgid "WeiBo"
 msgstr "微博"
 
-#: .\models.py:79
+#: .\models.py:81
 msgid "Comment"
 msgstr "备注"
 
-#: .\models.py:80
+#: .\models.py:82
 msgid "Last Login"
 msgstr "最近一次登录"
 
-#: .\models.py:81
+#: .\models.py:83
 msgid "Current Send Bytes"
 msgstr ""
 
-#: .\models.py:82
+#: .\models.py:84
 msgid "Current Receive Bytes"
 msgstr ""
 
-#: .\models.py:83
+#: .\models.py:85
 msgid "Total Send Bytes"
 msgstr ""
 
-#: .\models.py:84
+#: .\models.py:86
 msgid "Total Receive Bytes"
 msgstr ""
 
-#: .\models.py:85
+#: .\models.py:87
 msgid "Token"
 msgstr ""
 
@@ -153,9 +153,9 @@ msgid "AD Management"
 msgstr ""
 
 #: .\templates\ad_list.html:78 .\templates\create_project.html:7
-#: .\templates\gateway_list.html:69 .\templates\notification_list.html:70
-#: .\templates\sms_template_list.html:69 .\views.py:36 .\views.py:97
-#: .\views.py:236
+#: .\templates\gateway_list.html:69 .\templates\notification_list.html:77
+#: .\templates\sms_template_list.html:69 .\views.py:37 .\views.py:99
+#: .\views.py:242 .\views.py:300
 msgid "Create"
 msgstr "新增"
 
@@ -164,7 +164,7 @@ msgid "Thumbnail"
 msgstr "缩略图"
 
 #: .\templates\ad_list.html:84 .\templates\gateway_list.html:75
-#: .\templates\notification_list.html:80 .\templates\sms_template_list.html:75
+#: .\templates\notification_list.html:87 .\templates\sms_template_list.html:75
 msgid "Operations"
 msgstr "操作"
 
@@ -218,9 +218,13 @@ msgstr "MAC地址"
 
 #: .\templates\gateway_confirm_delete.html:6
 msgid "Are you sure you want to delete "
-msgstr "您确定要删除？"
+msgstr "您确定要删除"
 
-#: .\templates\gateway_list.html:62
+#: .\templates\gateway_confirm_delete.html:7
+msgid "Confirm"
+msgstr "确认"
+
+#: .\templates\gateway_list.html:62 .\views.py:38
 msgid "Gateways"
 msgstr "网关名称"
 
@@ -228,11 +232,11 @@ msgstr "网关名称"
 msgid "Notification Detail"
 msgstr "通知详情"
 
-#: .\templates\notification_list.html:62
+#: .\templates\notification_list.html:69 .\views.py:301
 msgid "Notifications"
 msgstr "通知"
 
-#: .\templates\sms_template_list.html:62 .\views.py:237
+#: .\templates\sms_template_list.html:62 .\views.py:243
 msgid "SMS Templates"
 msgstr "短信模板"
 
@@ -240,18 +244,42 @@ msgstr "短信模板"
 msgid "Template"
 msgstr "短信模板"
 
-#: .\views.py:49
+#: .\templatetags\admin_filters.py:9
+msgid "Yes"
+msgstr ""
+
+#: .\templatetags\admin_filters.py:11
+msgid "No"
+msgstr ""
+
+#: .\templatetags\admin_filters.py:16
+msgid "All"
+msgstr ""
+
+#: .\validator.py:11
+msgid "Invalid MAC Address"
+msgstr "无效的MAC地址"
+
+#: .\validator.py:19
+msgid "Invalid Phone Number"
+msgstr "无效的手机号码"
+
+#: .\views.py:51
 msgid "Modify Gateway"
 msgstr "网关编辑"
 
-#: .\views.py:110
+#: .\views.py:100
+msgid "AD"
+msgstr ""
+
+#: .\views.py:113
 msgid "Modify Ad"
 msgstr "广告编辑"
 
-#: .\views.py:250
+#: .\views.py:256
 msgid "Modify SMS Template"
 msgstr "短信模板编辑"
 
-#: .\views.py:300
+#: .\views.py:315
 msgid "Modify Notification"
 msgstr "通知编辑"

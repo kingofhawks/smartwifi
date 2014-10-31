@@ -59,7 +59,7 @@
 {% block content-header %}
 <h1>
     {% trans "System Admin" %}
-    <small>{% trans "Administrators" %}</small>
+    <small></small>
 </h1>
 {% endblock %}
 
@@ -70,7 +70,7 @@
     </div><!-- /.box-header -->
     <div class="box-body table-responsive">
         <div class="btn-group">
-          <a href="{% url "accounts.sysadmin.add" %}" class="btn btn-default">{% trans "Create" %}</a>
+          <a href="{% url "accounts.sysadmin.add" %}" class="btn btn-primary">{% trans "Create" %}</a>
         </div>
 
         <table class="table table-bordered table-hover" id="table">

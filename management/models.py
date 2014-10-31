@@ -7,6 +7,8 @@ from accounts.models import Customer, Agent
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.shortcuts import get_object_or_404
+from django.utils import timezone
+from validator import validate_mac
 
 
 class Notification(models.Model):
@@ -15,7 +17,7 @@ class Notification(models.Model):
     creator = models.ForeignKey(User, verbose_name=_('Creator'), related_name='notification_creator')
     target = models.ForeignKey(User, verbose_name=_('Target'), blank=True, null=True, related_name='notification_target')
     processed = models.BooleanField(verbose_name=_('Processed'), default=False)
-    date = models.DateTimeField(verbose_name=_('Date'), blank=True, null=True, default=datetime.utcnow())
+    date = models.DateTimeField(verbose_name=_('Date'), blank=True, null=True, default=timezone.now())
 
     class Meta:
         verbose_name = _('Notification')
@@ -24,16 +26,16 @@ class Notification(models.Model):
         )
 
     def __unicode__(self):
-        return u'Notification:{}'.format(self.content)
+        return self.title
 
 
 class Gateway(models.Model):
     gateway_name = models.CharField(verbose_name=_('Gateway Name'), max_length=128)
-    mac = models.CharField(verbose_name=_('Mac'), max_length=128)
+    mac = models.CharField(verbose_name=_('Mac'), max_length=128, validators=[validate_mac])
     customer = models.ForeignKey(Customer, verbose_name=_('Customer'))
 
     def __unicode__(self):
-        return u'Gateway:{}'.format(self.gateway_name)
+        return self.gateway_name
 
 
 AD_TYPE_CHOICES = (
@@ -44,7 +46,7 @@ AD_TYPE_CHOICES = (
 
 class Ad(models.Model):
     ad_type = models.CharField(verbose_name=_('Ad Type'), max_length=32, choices=AD_TYPE_CHOICES)
-    ad_img = models.ImageField(verbose_name=_('AD Img'), upload_to="pictures", blank=True, null=True)
+    ad_img = models.ImageField(verbose_name=_('AD Img'), upload_to="pictures")
     ad_text = models.CharField(verbose_name=_('Ad Text'), max_length=128, blank=True, null=True)
 
     def __unicode__(self):
@@ -65,7 +67,7 @@ class SmsTemplate(models.Model):
     template = models.CharField(verbose_name=_('SmsTemplate'), max_length=256)
 
     def __unicode__(self):
-        return u'SmsTemplate:{}'.format(self.template)
+        return self.name
 
 
 class WifiClient(models.Model):
@@ -92,11 +94,11 @@ class WifiClient(models.Model):
 def create_notifications(sender, instance, **kwargs):
     if kwargs['created']:
         print '*'*20
-        print instance.target
-        print instance.creator
-        print instance.creator.pk
-        print instance.creator.groups.all()
+        print 'target:{} creator:{}'.format(instance.target, instance.creator)
+        #print instance.creator.pk
+        #print instance.creator.groups.all()
         groups = instance.creator.groups.values_list('name', flat=True)
+        print 'groups:{}'.format(groups)
         if instance.target:
             return
         if 'AgentGroup' in groups:
@@ -105,27 +107,29 @@ def create_notifications(sender, instance, **kwargs):
             customers = Customer.objects.filter(agent=agent)
             print list(customers)
             for customer in customers:
-                notification = Notification(title=instance.title,
-                                            content=instance.content,
-                                            creator=instance.creator, target=customer.user, date=instance.date)
-                notification.save()
-            pass
+                if customer.user:
+                    notification = Notification(title=instance.title,
+                                                content=instance.content,
+                                                creator=instance.creator, target=customer.user, date=instance.date)
+                    notification.save()
         elif 'SuperAdminGroup' in groups or 'AdminGroup' in groups:
             #Create notifications for all agents and customers
             print '%'*20
             agents = Agent.objects.all()
             print list(agents)
             for agent in agents:
-                notification = Notification(title=instance.title,
-                                            content=instance.content,
-                                            creator=instance.creator, target=agent.user, date=instance.date)
-                notification.save()
+                if agent.user:
+                    notification = Notification(title=instance.title,
+                                                content=instance.content,
+                                                creator=instance.creator, target=agent.user, date=instance.date)
+                    notification.save()
 
             customers = Customer.objects.all()
             print list(customers)
             for customer in customers:
-                notification = Notification(title=instance.title,
-                                            content=instance.content,
-                                            creator=instance.creator, target=customer.user, date=instance.date)
-                notification.save()
+                if customer.user:
+                    notification = Notification(title=instance.title,
+                                                content=instance.content,
+                                                creator=instance.creator, target=customer.user, date=instance.date)
+                    notification.save()
 

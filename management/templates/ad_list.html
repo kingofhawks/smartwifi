@@ -69,13 +69,13 @@
 {% block content-header %}
 <h1>
     {% trans "AD Management" %}
-    <small>ad</small>
+    <small></small>
 </h1>
 {% endblock %}
 
 {% block content %}
 <div class="btn-group">
-  <a href="{% url "management.ad.add" %}" class="btn btn-default">{% trans "Create" %}</a>
+  <a href="{% url "management.ad.add" %}" class="btn btn-primary">{% trans "Create" %}</a>
 </div>
 <table class="display table table-bordered table-hover" id="table">
     <thead>

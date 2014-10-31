@@ -60,13 +60,13 @@
 {% block content-header %}
 <h1>
     {% trans "Customers" %}
-    <small>customer</small>
+    <small></small>
 </h1>
 {% endblock %}
 
 {% block content %}
 <div class="btn-group">
-  <a href="{% url "accounts.customer.add" %}" class="btn btn-default">{% trans "Create" %}</a>
+  <a href="{% url "accounts.customer.add" %}" class="btn btn-primary">{% trans "Create" %}</a>
 </div>
 <table class="display table table-bordered table-hover" id="table">
     <thead>

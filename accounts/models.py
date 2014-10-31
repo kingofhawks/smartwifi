@@ -3,6 +3,7 @@ from django.contrib.auth.models import User, Group
 from django.utils.translation import ugettext_lazy as _
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
+from management.validator import validate_phone
 
 
 class BaseUser(models.Model):
@@ -10,7 +11,7 @@ class BaseUser(models.Model):
     username = models.CharField(verbose_name=_('Username'), max_length=32)
     password = models.CharField(verbose_name=_('Password'), max_length=32)
     #full_name = models.CharField(verbose_name=_('Full Name'), max_length=32, blank=True, null=True)
-    phone = models.CharField(verbose_name=_('Phone'), max_length=32, blank=True, null=True)
+    phone = models.CharField(verbose_name=_('Phone'), max_length=32, blank=True, null=True, validators=[validate_phone])
     qq = models.CharField(verbose_name=_('QQ'), max_length=32, blank=True, null=True)
     email = models.EmailField(verbose_name=_('Email'), max_length=32)
     override_ad1 = models.BooleanField(verbose_name=_('override_ad1'), default=False)

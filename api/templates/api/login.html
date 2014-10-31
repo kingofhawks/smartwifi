@@ -41,8 +41,29 @@
 
         </div>
 
+        <div class="form-box" id="ad-box">
+            <div class="body" id="content" hidden="hidden"></div>
+        </div>
+
         <script src="{% static "jquery/dist/jquery.min.js" %}"></script>
         <script src="{% static "bootstrap/dist/js/bootstrap.min.js" %}"></script>
+        <script>
+            $(document).ready(function(){
+                var url = "{% url 'management.ad.detail' pk=99999 %}";
+                $.get("{% url 'api:login_ad' %}", function(data){
+                    console.log(data);
+                    var large_image = $('<img />');
+                    large_image.attr('src', data.image);
+                    if (data.content.length!=0){
+                        $("#content").show();
+                        $("#content").text(data.content);
+                    }
+
+                    $("#ad-box").append(large_image);
+                });
+
+            });
+        </script>
 
     </body>
 </html>

@@ -3,9 +3,13 @@ smartwifi
 开发环境:
 从以下链接下载python2.7 distribution
 http://continuum.io/downloads
+>
 $cd smartwifi
+$python manage.py migrate #to create database table
+$python manage.py createsuperuser #to create super admin user
 $python manage.py runserver
 127.0.0.1:8000/accounts/login
+
 default admin user:admin/11111
 
 TODO:
